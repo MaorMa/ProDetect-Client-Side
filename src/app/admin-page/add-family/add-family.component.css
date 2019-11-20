@@ -1,0 +1,73 @@
+.card-header {
+    text-align: center;
+}
+
+.card-body {
+    float: center;
+    text-align: center;
+    align-content: center;
+}
+
+.card {
+    float: center;
+    margin: 10px;
+}
+
+.flex-container {
+    display: flex;
+    justify-content: center;
+    align-content: stretch;
+}
+
+.alert {
+    direction: rtl;
+    text-align: center;
+}
+
+.form {
+    float: center;
+    text-align: center;
+}
+
+mat-form-field{
+    position: center;
+    align-content: center;
+    text-align: center; 
+}
+
+.mat-form{
+    float: center;
+    text-align: center;
+}
+
+input{
+    float: center;
+}
+
+.form-group row{
+    float: center;
+}
+
+form, button,img{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+button{
+    background: #1f6d7e;
+    width: 100%;
+}
+
+.main-div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-image: url(../../../assets/background.jpg);
+}

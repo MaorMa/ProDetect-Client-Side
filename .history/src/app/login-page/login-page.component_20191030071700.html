@@ -1,0 +1,39 @@
+<div class='main-div'>
+    <mat-card class="login-card">
+        <img src="assets/rrs.png" height="114">
+        <hr>
+        <mat-card-content>
+            <form [formGroup]="loginForm" class="login-form" (ngSubmit)="login();">
+                <table>
+                    <tr>
+                        <td>
+                            <mat-form-field appearance="outline">
+                                <input matInput formControlName="username" placeholder="שם משתמש" name="username"
+                                    required>
+                            </mat-form-field>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <mat-form-field appearance="outline">
+                                <input matInput formControlName="password" placeholder="סיסמא" type="password"
+                                    name="password" required>
+                            </mat-form-field>
+                        </td>
+                    </tr>
+                    <button class="btn btn-primary" *ngIf="!loginError" type="submit" [disabled]="!loginForm.valid" mat-raised-button>התחברות
+                        למערכת</button>
+                        <div *ngIf="loginError">
+                                <div class="alert alert-danger" style="text-align: center">
+                                    פרטי ההתחברות אינם נכונים
+                                </div>
+                            </div>
+                </table>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>
+<div *ngIf="isLoading" style="text-align: center">
+    <p>...אנא המתן</p>
+        <app-loading-spinner></app-loading-spinner>
+    </div>

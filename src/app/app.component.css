@@ -1,0 +1,23 @@
+mat-toolbar{
+    position: right;
+}
+
+.nav {
+    position: absolute;
+    right:0px;
+}
+
+.mat-toolbar.mat-primary {
+  background: #1f6d7e;
+  color: #fff;
+}
+
+.mat-menu-item{
+    background: #1f6d7e;
+    color: #fff;
+}
+
+.mat-menu-item:hover{
+    background: #158299;
+    color: #fff;
+}

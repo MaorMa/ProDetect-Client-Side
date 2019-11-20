@@ -1,0 +1,41 @@
+<div class="main-div">
+  <div class="d-flex justify-content-center flex-row-reverse flex wrap">
+    <div *ngIf="isLoading" style="text-align: center">
+      <br>
+      <app-loading-spinner></app-loading-spinner>
+      <p>...מאחזר קבלות</p>
+    </div>
+    <div *ngIf="!isLoading" class="card mb-4 shadow-sm" id="familyID" matTooltip="משפחות שהעלו קבלות"
+      [matTooltipShowDelay]=1000>
+      <div class="card-header">
+        <mat-icon [(matBadge)]="amountOfRec" matBadgeOverlap="true" matBadgeColor="primary" matBadgeSize="medium">group
+        </mat-icon>
+      </div>
+      <div class="card-body">
+        <mat-form-field class="mat-form">
+          <mat-label>מזהה משפחה</mat-label>
+          <mat-select (selectionChange)="familyChanged($event.value)" [(value)]="selectedFamily">
+            <mat-option *ngFor="let family of families;let i = index" [value]="i">
+              {{family}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+  <div class="card mb-4 shadow-sm" id="page">
+    <mat-paginator [length]="amountOfRec" [pageSize]=1 (page)="pageChange($event)" matTooltip="מעבר בין קבלות"
+      [matTooltipShowDelay]=1000>
+    </mat-paginator>
+    <div role="alert" *ngIf='currentReceiptStatus === "-1"' class='alert alert-info'>
+      <p class="alert-heading">קבלה זו בתהליך עיבוד בשרת. נא לנסות שנית בעוד מספר דקות</p>
+      <hr>
+      <p class="mb-0">שעת העלאת הקבלה הנ"ל לשרת: {{currReceiptUploadTime | date:'short'}}</p>
+    </div>
+    <div class='flex-container' [hidden]='selectedFamily === "" || currentReceiptStatus === "-1"'>
+      <img *ngIf='selectedFamily !== "" && currentReceiptStatus !== "-1"' style="height: 30%; width:30%;" id='image'
+        [src]="image">
+      <app-admin-table #table></app-admin-table>
+    </div>
+  </div>
+</div>

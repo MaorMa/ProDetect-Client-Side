@@ -1,0 +1,25 @@
+.card-header {
+  text-align: center;
+}
+
+.card-body {
+  align-content: center
+}
+
+.card {
+  margin: 15px;
+}
+
+.content{
+  background-size: cover;
+  background-repeat:no-repeat;
+  background-position:center; 
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  width:100%;
+  background-image: url(../../assets/background.jpg);
+}
+
+.mat-form {
+  text-align: center;
+}

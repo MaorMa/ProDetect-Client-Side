@@ -1,0 +1,39 @@
+form, button,img{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+mat-card{
+    background-color: #fefefe;
+    opacity: 0.95;
+    margin: 10px;
+}
+
+mat-form-field{
+    position: center;
+    align-content: center;
+    text-align: center; 
+}
+
+.main-div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-image: url(../../assets/background.jpg);
+}
+
+img{
+    margin-left: 30px;
+}
+
+button{
+    background: #1f6d7e;
+    width: 100%;
+}

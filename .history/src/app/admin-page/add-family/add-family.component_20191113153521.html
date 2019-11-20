@@ -1,0 +1,25 @@
+<div class="d-flex justify-content-center flex-row-reverse">
+    <div class="card mb-4 shadow-sm" id="familyID">
+        <div class="card-header">
+            <mat-icon>person_add</mat-icon>
+            <h4> בחר מזהה משפחה</h4>
+        </div>
+        <div *ngIf="createForm.get('sID').value && createForm.get('sID').touched">
+                <div class="alert alert-danger" style="text-align: center">
+                        מזהה באנגלית בלבד
+                </div>
+        </div>
+        <div class="card-body">
+            <form [formGroup]="createForm" (ngSubmit)="onFormSubmit(createForm.value)" class="form">
+                <div class="form-group row">
+                    <mat-form-field>
+                        <input type="text" ngControl="sID" pattern="^[a-zA-Z0-9_.-]*$" formControlName="sID" matTooltip="שם משתמש המשפחה" matInput
+                            placeholder="מזהה משפחה">
+                    </mat-form-field>
+                </div>
+                <br>
+                <button class="btn btn-primary" type="submit" [disabled]="!createForm.valid" matTooltip="יצירת משתמש חדש למשפחה" mat-raised-button>הוספת משפחה למערכת </button>
+            </form>
+        </div>
+    </div>
+</div>
