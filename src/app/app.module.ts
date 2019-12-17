@@ -13,6 +13,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxImageZoomModule } from 'ngx-image-zoom';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { AuthGuardService as AuthGuard } from './Services/auth-guard.service';
+//Zoom
 
 //Material
 import { MatTabsModule } from '@angular/material/tabs';

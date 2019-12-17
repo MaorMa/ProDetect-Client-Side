@@ -45,15 +45,20 @@
         </td>
         <td>
           <button mat-icon-button (click)="deleteRow(i)" matTooltip="מחיקת השורה הנוכחית" [matTooltipShowDelay]=500>
-            <mat-icon>delete_forever</mat-icon>
+            <mat-icon>delete_sweep</mat-icon>
           </button>
         </td>
       </tr>
     </tbody>
   </table>
-  <button mat-icon-button (click)="saveCurrReceipt()" matTooltip="שמירה של הקבלה הנוכחית" [matTooltipShowDelay]=500>
-    <mat-icon [ngClass]="currReceipt.status === '0' ? 'notSaved' : 'saved'">save</mat-icon>
-  </button>
+  <div>
+    <button mat-icon-button (click)="deleteCurrReceipt()" matTooltip="מחיקה של הקבלה הנוכחית" [matTooltipShowDelay]=500>
+      <mat-icon>delete_forever</mat-icon>
+    </button>
+    <button mat-icon-button (click)="saveCurrReceipt()" matTooltip="שמירה של הקבלה הנוכחית" [matTooltipShowDelay]=500>
+      <mat-icon [ngClass]="currReceipt.status === '0' ? 'notSaved' : 'saved'">save</mat-icon>
+    </button>
+  </div>
 </div>
 
 <div id=button_scroll_to_top>

@@ -33,9 +33,16 @@
       <p class="mb-0">שעת העלאת הקבלה הנ"ל לשרת: {{currReceiptUploadTime | date:'short'}}</p>
     </div>
     <div class='flex-container' [hidden]='selectedFamily === "" || currentReceiptStatus === "-1"'>
-      <img *ngIf='selectedFamily !== "" && currentReceiptStatus !== "-1"' style="height: 30%; width:30%;" id='image'
-        [src]="image">
-      <app-admin-table #table></app-admin-table>
+      <!-- <img *ngIf='selectedFamily !== "" && currentReceiptStatus !== "-1"' style="height: 30%; width:30%;" id='image'
+        [src]="image"> -->
+      <div class="image-div w-35">
+        <ngx-image-zoom class="image" *ngIf='selectedFamily !== "" && currentReceiptStatus !== "-1"' [thumbImage]="image"
+          [fullImage]="image" [zoomMode]="toggle" [enableScrollZoom]="true" [enableLens]="true" [lensWidth]="300" [lensHeight]="150"
+          [lensHeight]="100"></ngx-image-zoom>
+      </div>
+      <div class="table">
+        <app-admin-table #table></app-admin-table>
+      </div>
     </div>
   </div>
 </div>

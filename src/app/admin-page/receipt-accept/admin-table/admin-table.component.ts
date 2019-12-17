@@ -132,6 +132,18 @@ export class AdminTableComponent implements OnInit {
     }
   }
 
+  deleteCurrReceipt() {
+    if (confirm("האם למחוק קבלה זו? לאחר המחיקה, הקבלה תיעלם לצמיתות מן המערכת")) {
+      // this.researcherService.SaveCurrentReceipt(this.allTableData['Value'][this.currRecIndex], this.selectedFamily).subscribe(
+      //   (resValue) => {
+      //     this.allTableData['Value'][this.currRecIndex]['status'] = "1";
+      //     this.openSnackBar('נתוני הקבלה הנוכחית נשמרו בהצלחה', 'סגור', 1000);
+      //   }, (error) => {
+
+      //   });
+    }
+  }
+
   /**
 * Open a snack bar with information for the user
 * @param message - value to show in snackBar
