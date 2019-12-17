@@ -1,0 +1,36 @@
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<div class="table-responsive">
+    <label>{{currHebMarket}}</label>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>מק"ט</th>
+                <th>שם מוצר</th>
+                <th>כמות</th>
+                <th>נוטריאנטים</th>
+                <th>מחיר</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let row of currTableData; let i = index ">
+                <td>{{row.sID}}</td>
+                <td>{{row.description}}</td>
+                <td>{{row.quantity}}</td>
+                <td>
+                    <button mat-icon-button (click)="loadNutriantsModal(row)" matTooltip="צפיה בנוטריאנטים"
+                        [matTooltipShowDelay]=500>
+                        <mat-icon>fastfood</mat-icon>
+                </td>
+                </button>
+                <td>{{row.price}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div id=button_scroll_to_top>
+    <button id="fixedBtn" (click)="exportToCSV()" mat-icon-button matTooltip="יצוא נתונים לקובץ"
+        matTooltipPosition="right" matTooltipShowDelay=500>
+        <mat-icon>cloud_download</mat-icon>
+    </button>
+</div>

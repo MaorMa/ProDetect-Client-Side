@@ -1,0 +1,65 @@
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<button [disabled]="this.deletedHistory[this.currRecIndex] == undefined 
+|| this.deletedHistory[this.currRecIndex].length == 0" mat-icon-button (click)="undo()"
+  matTooltip="מוצר שנמחק יחזור לסוף הרשימה" [matTooltipShowDelay]=500>
+  <mat-icon>undo</mat-icon>
+</button>
+
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>מק"ט</th>
+        <th>שם מוצר</th>
+        <th>כמות</th>
+        <th>מחיר ליחידה</th>
+        <th>נוטריאנטים</th>
+        <th>עריכה</th>
+        <th>מחיקה</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr [ngStyle]="{'border': '1.34px solid #bbbdba'}" *ngFor="let row of currTableData; let i = index">
+        <td [ngStyle]="{'background-color': (!row.validProduct) ? 'mistyrose' : '#c2efae'}">{{row.sID}}</td>
+        <td>{{row.description}}</td>
+        <td>{{row.quantity}}</td>
+        <td> {{row.price}}</td>
+        <td clsas="direction: rtl;">
+          <!-- <button mat-icon-button (click)="loadNutriantsModal(row)" matTooltip="בחירת שם המוצר הכי קרוב, למשיכת הנוטריאנטים"
+            [matTooltipShowDelay]=500>
+            <mat-icon>fastfood</mat-icon>
+          </button> -->
+          <mat-form-field class="mat-form">
+            <mat-label>שם מוצר</mat-label>
+            <mat-select>
+              <mat-option *ngFor="let foodName of foodNames;let i = index" [value]="i">
+                {{foodName}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </td>
+        <td>
+          <button mat-icon-button (click)="loadEditModal(row)" matTooltip="עריכת ערכי המוצר הנוכחי"
+            [matTooltipShowDelay]=500>
+            <mat-icon>edit</mat-icon>
+          </button>
+        </td>
+        <td>
+          <button mat-icon-button (click)="deleteRow(i)" matTooltip="מחיקת השורה הנוכחית" [matTooltipShowDelay]=500>
+            <mat-icon>delete_forever</mat-icon>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <button mat-icon-button (click)="saveCurrReceipt()" matTooltip="שמירה של הקבלה הנוכחית" [matTooltipShowDelay]=500>
+    <mat-icon [ngClass]="currReceipt.status === '0' ? 'notSaved' : 'saved'">save</mat-icon>
+  </button>
+</div>
+
+<div id=button_scroll_to_top>
+  <button id="fixedBtn" (click)="loadCreateModal()" mat-icon-button matTooltip="יצירת מוצר חדש - יתווסף לסוף הרשימה"
+    matTooltipPosition="right" matTooltipShowDelay=500>
+    <mat-icon>add_circle_outline</mat-icon>
+  </button>
+</div>

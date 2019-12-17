@@ -1,0 +1,32 @@
+* {
+    direction: rtl;
+}
+
+th,
+td {
+    text-align: right;
+    align-content: right;
+}
+
+#fixedBtn {
+    position: fixed;
+    bottom: 2%;
+    right: 1%;
+}
+
+#fixedBtn:hover {
+    background-color: #c0ffac;
+}
+
+.saved {
+    background-color: #cfffc0;
+}
+
+.notSaved {
+    background-color: rgb(231, 170, 170)
+}
+
+.dropdown {
+    text-align: right;
+    margin: 0px;
+}
