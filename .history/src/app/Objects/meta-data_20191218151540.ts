@@ -6,7 +6,6 @@ export class MetaData {
     private description: string;
     private quantity: string;
     private price: string;
-    private productNameChosen: string;
     // private nutrients: Nutrient[];
     // private optionalProducts: ResearchProduct[];
     private validProduct: boolean;
@@ -40,10 +39,5 @@ export class MetaData {
 
     getPrice() {
         return this.price;
-    }
-
-    setProductNameChosen(name: string) {
-        // console.log(name ? name : "")
-        this.productNameChosen = name ? name : "";
     }
 }

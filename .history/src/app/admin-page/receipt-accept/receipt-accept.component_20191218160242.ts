@@ -1,17 +1,17 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ViewTableComponent } from './view-table/view-table.component';
-import { MatPaginator, PageEvent } from '@angular/material';
-import { ReceiptToReturnList } from 'src/app/Objects/receipt-to-return-list';
+import { PageEvent, MatPaginator } from '@angular/material/paginator';
 import { ResearcherService } from 'src/app/Services/researcher.service';
+import { ReceiptToReturnList } from 'src/app/Objects/receipt-to-return-list';
+import { AdminTableComponent } from './admin-table/admin-table.component';
 
 @Component({
-  selector: 'app-receipt-view',
-  templateUrl: './receipt-view.component.html',
-  styleUrls: ['./receipt-view.component.css']
+  selector: 'app-receipt-accept',
+  templateUrl: './receipt-accept.component.html',
+  styleUrls: ['./receipt-accept.component.css']
 })
-export class ReceiptViewComponent implements OnInit {
+export class ReceiptAcceptComponent implements OnInit {
 
-  @ViewChild(ViewTableComponent, { static: false }) table: ViewTableComponent;
+  @ViewChild(AdminTableComponent, { static: false }) table: AdminTableComponent;
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   familyUploadsJson: any[][];
   families: string[] = [];
@@ -27,8 +27,8 @@ export class ReceiptViewComponent implements OnInit {
   isLoading: boolean = true;
 
   constructor(private researcherService: ResearcherService) {
-    this.researcherService.GetAllApprovedData().subscribe((resValue) => {
-      console.log(JSON.parse(resValue));
+    this.researcherService.GetAllRecognizedData().subscribe((resValue) => {
+      // console.log(JSON.parse(resValue));
       for (let pair of JSON.parse(resValue)) {
         this.allData.push(new ReceiptToReturnList().deserialize(pair));
         this.families.push(pair.Key);
@@ -46,13 +46,21 @@ export class ReceiptViewComponent implements OnInit {
     this.paginator.pageIndex = 0;
     this.amountOfRec = this.allData[index].Value.length;
     this.allFamilyData = this.allData[index];
-    this.table.updateAllTableData(this.allFamilyData);
+    this.table.updateAllTableData(this.allFamilyData, this.families[this.selectedFamily]);
+    this.currentReceiptStatus = this.allFamilyData['Value'][0]['status'];
+    this.currReceiptUploadTime = this.allFamilyData['Value'][0]['uploadTime'];
+    this.updatePhoto(0);
   }
 
-  pageChange(index: PageEvent): void {
+  pageChange(index: PageEvent) {
     this.table.updateDataIndex(index.pageIndex);
     this.currentReceiptStatus = this.allFamilyData['Value'][index.pageIndex]['status'];
     this.currReceiptUploadTime = this.allFamilyData['Value'][index.pageIndex]['uploadTime'];
+    this.updatePhoto(index.pageIndex);
   }
 
+  updatePhoto(index: number): void {
+    if (this.allFamilyData['Value'][index]['image'] !== "")
+      this.image = 'data:image/png;base64,' + this.allFamilyData['Value'][index]['image'];
+  }
 }

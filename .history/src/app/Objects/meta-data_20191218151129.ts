@@ -6,9 +6,8 @@ export class MetaData {
     private description: string;
     private quantity: string;
     private price: string;
-    private productNameChosen: string;
-    // private nutrients: Nutrient[];
-    // private optionalProducts: ResearchProduct[];
+    private nutrients: Nutrient[];
+    private optionalProducts: ResearchProduct[];
     private validProduct: boolean;
 
     deserialize(input: any): this {
@@ -16,12 +15,12 @@ export class MetaData {
         this.description = input.description;
         this.quantity = input.quantity;
         this.price = input.price;
-        // this.nutrients = [];
-        // for (let nutrient of input.nutrients)
-        //     this.nutrients.push(new Nutrient().deserialize(nutrient));
-        // this.optionalProducts = [];
-        // for (let optionalProduct of input.optionalProducts)
-        //     this.optionalProducts.push(new ResearchProduct().deserialize(optionalProduct));
+        this.nutrients = [];
+        for (let nutrient of input.nutrients)
+            this.nutrients.push(new Nutrient().deserialize(nutrient));
+        this.optionalProducts = [];
+        for (let optionalProduct of input.optionalProducts)
+            this.optionalProducts.push(new ResearchProduct().deserialize(optionalProduct));
         this.validProduct = input.validProduct;
         return this;
     }
@@ -40,10 +39,5 @@ export class MetaData {
 
     getPrice() {
         return this.price;
-    }
-
-    setProductNameChosen(name: string) {
-        // console.log(name ? name : "")
-        this.productNameChosen = name ? name : "";
     }
 }

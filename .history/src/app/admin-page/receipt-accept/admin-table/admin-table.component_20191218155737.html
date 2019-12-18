@@ -30,7 +30,6 @@
               [matTooltipShowDelay]=500>
               <mat-label>שם מוצר</mat-label>
               <mat-select (selectionChange)="row.setProductNameChosen($event.value)">
-                <mat-option>---</mat-option>
                 <mat-option *ngFor="let foodName of foodNames;let i = index" [value]="foodName" class="dropdown-value">
                   {{foodName}}
                 </mat-option>

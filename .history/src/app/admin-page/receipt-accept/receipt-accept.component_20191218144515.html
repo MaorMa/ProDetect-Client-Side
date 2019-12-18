@@ -37,7 +37,7 @@
         [src]="image"> -->
       <div class="image-div w-35">
         <ngx-image-zoom class="image" *ngIf='selectedFamily !== "" && currentReceiptStatus !== "-1"'
-          [thumbImage]="image" [fullImage]="image" [zoomMode]="hover-freeze" [enableScrollZoom]="true" [enableLens]="true"
+          [thumbImage]="image" [fullImage]="image" [zoomMode]="click" [enableScrollZoom]="true" [enableLens]="true"
           [lensWidth]="300" [lensHeight]="150"></ngx-image-zoom>
       </div>
       <div class="table">

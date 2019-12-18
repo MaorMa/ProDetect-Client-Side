@@ -43,7 +43,7 @@ export class MetaData {
     }
 
     setProductNameChosen(name: string) {
-        // console.log(name ? name : "")
+        console.log(name ? name : "")
         this.productNameChosen = name ? name : "";
     }
 }

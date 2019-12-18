@@ -36,9 +36,9 @@
       <!-- <img *ngIf='selectedFamily !== "" && currentReceiptStatus !== "-1"' style="height: 30%; width:30%;" id='image'
         [src]="image"> -->
       <div class="image-div w-35">
-        <ngx-image-zoom class="image" *ngIf='selectedFamily !== "" && currentReceiptStatus !== "-1"'
-          [thumbImage]="image" [fullImage]="image" [zoomMode]="hover-freeze" [enableScrollZoom]="true" [enableLens]="true"
-          [lensWidth]="300" [lensHeight]="150"></ngx-image-zoom>
+        <ngx-image-zoom class="image" *ngIf='selectedFamily !== "" && currentReceiptStatus !== "-1"' [thumbImage]="image"
+          [fullImage]="image" [zoomMode]="click" [enableScrollZoom]="false" [enableLens]="true" [lensWidth]="300" [lensHeight]="150"
+          [lensHeight]="100"></ngx-image-zoom>
       </div>
       <div class="table">
         <app-admin-table #table></app-admin-table>
