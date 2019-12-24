@@ -11,15 +11,13 @@
 }
 
 .content{
-  height: 70vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-repeat: no-repeat;
-  -webkit-background-size: cover;
+  background-size: cover;
+  background-repeat:no-repeat;
+  background-position:center; 
   -moz-background-size: cover;
   -o-background-size: cover;
-  background-size: cover;
+  height: 90vh;
+  width:100%;
   background-image: url(../../assets/background.jpg);
 }
 
