@@ -9,11 +9,12 @@ import { baseURLService } from './base-urlservice.service';
 })
 export class GetSettingsService {
 
-  // apiUrl: string = 'http://localhost:59416/api/';
-  apiUrl: string;
+  apiUrl: string = 'http://localhost:59416/api/';
+  // apiUrl: string = 'http://proj.ise.bgu.ac.il/Proj-RR/backend/api/';
+  // apiUrl: string;
 
   constructor(private http: HttpClient, private baseURL: baseURLService) {
-    this.apiUrl = this.baseURL.appConfig.baseURL;
+    // this.apiUrl = this.baseURL.appConfig.baseURL;
    }
 
   getFamilies(): Observable<any> {

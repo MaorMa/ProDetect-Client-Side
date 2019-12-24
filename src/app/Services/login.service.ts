@@ -10,8 +10,8 @@ import { baseURLService } from './base-urlservice.service';
 })
 export class LoginService {
 
-  // apiUrl: string = 'http://localhost:59416/api/';
-  apiUrl: string = 'http://proj.ise.bgu.ac.il/Proj-RR/backend/api/';
+  apiUrl: string = 'http://localhost:59416/api/';
+  // apiUrl: string = 'http://proj.ise.bgu.ac.il/Proj-RR/backend/api/';
   // apiUrl: string; 
 
   constructor(private http: HttpClient, private snackBar: MatSnackBar, private baseURL: baseURLService) {

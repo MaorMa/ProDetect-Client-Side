@@ -12,23 +12,19 @@ import { baseURLService } from './base-urlservice.service';
 export class ResearcherService {//TODO - chec if token necc for all gets
 
   apiUrl: string = 'http://localhost:59416/api/';
+  // apiUrl: string = 'http://proj.ise.bgu.ac.il/Proj-RR/backend/api/';
+  // apiUrl: string;
 
-  constructor(private http: HttpClient, private snackBar: MatSnackBar,private baseURL: baseURLService) {
-    this.apiUrl = this.baseURL.getBaseURL();
-   }
-
-  // getFamilyUploads(): Observable<any> {
-  //   return this.apiGetCall("Receipt/GetTotalUploadsDetails");
-  // }
+  constructor(private http: HttpClient, private snackBar: MatSnackBar, private baseURL: baseURLService) {
+    // this.apiUrl = this.baseURL.appConfig.baseURL;
+  }
 
   GetAllRecognizedData(): Observable<any> {
     return this.http.post<any>(this.apiUrl + "Receipt/GetAllRecognizedData/", '', this.getTokenHeader());
-    // return this.apiGetCall("Receipt/GetAllRecognizedData");
   }
 
   GetAllApprovedData(): Observable<any> {
     return this.http.post<any>(this.apiUrl + "Receipt/GetAllApprovedData/", '', this.getTokenHeader());
-    // return this.apiGetCall("Receipt/GetAllApprovedData");
   }
 
   GetAllDataForMarketAndProductID(marketID: string, productID: number): Observable<any> {
@@ -36,14 +32,14 @@ export class ResearcherService {//TODO - chec if token necc for all gets
   }
 
   SaveCurrentReceipt(currTableData: ReceiptToReturn, selectedFamily: string): Observable<any> {
-    return this.http.put<any>(this.apiUrl + "Receipt/UpdateReceiptData/" + selectedFamily, currTableData, this.getTokenHeader());
+    return this.http.post<any>(this.apiUrl + "Receipt/UpdateReceiptData/" + selectedFamily, currTableData, this.getTokenHeader());
   }
 
-  CreateNewUser(familyName: string): Observable<any>{
+  CreateNewUser(familyName: string, password: string): Observable<any> {
     const formData = new FormData();
     formData.append("username", familyName);//Form
-    formData.append("password", 'rrs123123');//Form
-    return this.http.post<any>(this.apiUrl + "Users/AddFamilyUser/",formData, this.getTokenHeader());
+    formData.append("password", password);//Form
+    return this.http.post<any>(this.apiUrl + "Users/AddFamilyUser/", formData, this.getTokenHeader());
   }
 
   //Get info from server 
@@ -75,7 +71,7 @@ export class ResearcherService {//TODO - chec if token necc for all gets
       'Something bad happened; please try again later.');
   }
 
-  getTokenHeader(): any{
+  getTokenHeader(): any {
     const headerDict = {
       'Authorization': sessionStorage.getItem('token')
     }
