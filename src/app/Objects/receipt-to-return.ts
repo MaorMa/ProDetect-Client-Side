@@ -4,9 +4,9 @@ export class ReceiptToReturn {
     public receiptID: string;//TODO getters
     private marketID: string;
     private image: string;
-    private products: MetaData[];
     public status: string;
     private uploadTime: Date;
+    private products: MetaData[];
 
     deserialize(input: any): this {
         this.receiptID = input['receiptID'];

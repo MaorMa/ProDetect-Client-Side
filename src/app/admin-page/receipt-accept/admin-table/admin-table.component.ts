@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { AdminUpdateComponent } from './admin-update/admin-update.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -15,7 +15,7 @@ import { ReceiptToReturn } from 'src/app/Objects/receipt-to-return';
   styleUrls: ['./admin-table.component.css']
 })
 export class AdminTableComponent implements OnInit {
-  // @Output() savedEmitter = new EventEmitter();
+  @Output() deleteEmitter: EventEmitter<ReceiptToReturn> = new EventEmitter();
   allTableData: ReceiptToReturnList;
   selectedFamily: string;
   currReceipt: ReceiptToReturn = new ReceiptToReturn();
@@ -23,8 +23,6 @@ export class AdminTableComponent implements OnInit {
   currRecIndex: number;
   currMarket: string;
   deletedHistory: any[] = [];
-
-  foodNames: string[] = ['בננה','תפוח'];
 
   constructor(private dialog: MatDialog, private snackBar: MatSnackBar, private researcherService: ResearcherService) { }
 
@@ -61,7 +59,7 @@ export class AdminTableComponent implements OnInit {
     this.currTableData = this.allTableData['Value'][index]['products'];
     this.currReceipt = this.allTableData['Value'][index];
     this.currRecIndex = index;
-    // console.log("Table data:" + this.currTableData);
+    // console.log(this.allTableData);
   }
 
   loadEditModal(row: any) {
@@ -75,7 +73,7 @@ export class AdminTableComponent implements OnInit {
     dialogRef.componentInstance.editEmitter.subscribe((data: any) => {
       row = data;
       dialogRef.close();
-      this.openSnackBar('המוצר עודכן בהצלחה', 'סגור', 1000);
+      this.researcherService.openSnackBar('המוצר עודכן בהצלחה', 'סגור', 1000);
     });
   };
 
@@ -91,15 +89,15 @@ export class AdminTableComponent implements OnInit {
       // console.log(data.getsID());
       var row = this.currTableData.find(x => (x.getsID() == data.getsID()));
       // console.log("TCL: AdminTableComponent -> loadCreateModal -> row", row)
-      if(row){
-        this.openSnackBar('המוצר כבר קיים, עדכן את הכמות', 'סגור', 1500);
+      if (row) {
+        this.researcherService.openSnackBar('המוצר כבר קיים, עדכן את הכמות', 'סגור', 1500);
         dialogRef.close();
         this.loadEditModal(row);
       }
-      else{
-      this.currTableData.push(data);
-      dialogRef.close();
-      this.openSnackBar('המוצר נוצר ונוסף בהצלחה', 'סגור', 1000);
+      else {
+        this.currTableData.push(data);
+        dialogRef.close();
+        this.researcherService.openSnackBar('המוצר נוצר ונוסף בהצלחה', 'סגור', 1000);
       }
     });
   };
@@ -111,7 +109,7 @@ export class AdminTableComponent implements OnInit {
       // console.log(deletedLine)
       this.deletedHistory[this.currRecIndex].push(deletedLine[0]);
       // console.log(this.deletedHistory);
-      this.openSnackBar('המוצר נמחק בהצלחה', 'סגור', 1000);
+      this.researcherService.openSnackBar('המוצר נמחק בהצלחה', 'סגור', 1000);
     }
   }
 
@@ -120,39 +118,21 @@ export class AdminTableComponent implements OnInit {
   }
 
   saveCurrReceipt(): void {
-    // console.log(this.currTableData);
+    // console.log(this.allTableData['Value'][this.currRecIndex]);
     if (confirm("האם לשמור קבלה זו? לאחר השמירה, הקבלה לא תוצג שנית")) {
       this.researcherService.SaveCurrentReceipt(this.allTableData['Value'][this.currRecIndex], this.selectedFamily).subscribe(
         (resValue) => {
           this.allTableData['Value'][this.currRecIndex]['status'] = "1";
-          this.openSnackBar('נתוני הקבלה הנוכחית נשמרו בהצלחה', 'סגור', 1000);
+          this.researcherService.openSnackBar('נתוני הקבלה הנוכחית נשמרו בהצלחה', 'סגור', 1000);
         }, (error) => {
-
+          this.researcherService.openSnackBar('שגיאה בעת שמירת הקבלה, אנא נסו שנית', 'סגור', 1000);
         });
     }
   }
 
   deleteCurrReceipt() {
     if (confirm("האם למחוק קבלה זו? לאחר המחיקה, הקבלה תיעלם לצמיתות מן המערכת")) {
-      // this.researcherService.SaveCurrentReceipt(this.allTableData['Value'][this.currRecIndex], this.selectedFamily).subscribe(
-      //   (resValue) => {
-      //     this.allTableData['Value'][this.currRecIndex]['status'] = "1";
-      //     this.openSnackBar('נתוני הקבלה הנוכחית נשמרו בהצלחה', 'סגור', 1000);
-      //   }, (error) => {
-
-      //   });
+      this.deleteEmitter.emit(this.currReceipt);
     }
-  }
-
-  /**
-* Open a snack bar with information for the user
-* @param message - value to show in snackBar
-* @param action - value to show in Button in shnackBar
-* @param duration 
-*/
-  openSnackBar(message: string, action: string, duration: number): void {
-    this.snackBar.open(message, action, {
-      duration: duration,
-    });
   }
 }

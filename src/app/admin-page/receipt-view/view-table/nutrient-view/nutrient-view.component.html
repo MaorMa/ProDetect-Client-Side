@@ -1,0 +1,20 @@
+<mat-dialog-content>
+    <mat-card-content class="cards">
+        <div class="table-responsive">
+            <table class="table table-sm table-hover">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">נוטריאנט</th>
+                        <th scope="col">ערך</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let row of nutrientsToShow">
+                        <td> {{row.code}}</td>
+                        <td> {{row.value | number}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </mat-card-content>
+</mat-dialog-content>

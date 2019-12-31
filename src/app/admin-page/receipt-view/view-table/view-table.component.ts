@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar, MatDialog, MatDialogConfig } from '@angular/material';
 import { ReceiptToReturnList } from 'src/app/Objects/receipt-to-return-list';
 import { ReceiptToReturn } from 'src/app/Objects/receipt-to-return';
 import { MetaData } from 'src/app/Objects/meta-data';
 import { Angular5Csv } from 'angular5-csv/dist/Angular5-csv';
 import { Markets } from 'src/app/markets.enum';
+import { NutrientViewComponent } from './nutrient-view/nutrient-view.component';
 
 @Component({
   selector: 'app-view-table',
@@ -19,7 +20,7 @@ export class ViewTableComponent implements OnInit {
   currMarket: string;
   currHebMarket: string;
 
-  constructor(private snackBar: MatSnackBar) { }
+  constructor(private snackBar: MatSnackBar, private dialog: MatDialog) { }
 
   ngOnInit() {
   }
@@ -48,11 +49,22 @@ export class ViewTableComponent implements OnInit {
     this.currTableData = this.allTableData['Value'][index]['products'];
     this.currReceipt = this.allTableData['Value'][index];
     this.currRecIndex = index;
-    console.log("Table data:" + this.currTableData);
+    // console.log("Table data:" + this.currTableData);
   }
 
   loadNutriantsModal(row: any) {
-    console.log("Nutriants " + row)
+    if (row.nutrients.length != 0) {
+      const editDialogConfig = new MatDialogConfig();
+      editDialogConfig.disableClose = false;
+      editDialogConfig.autoFocus = true;
+      editDialogConfig.maxWidth = "25%";
+      editDialogConfig.maxHeight = "85%";
+      editDialogConfig.data = { Nutrients: row.nutrients };
+      var dialogRef = this.dialog.open(NutrientViewComponent, editDialogConfig);
+    }
+    else {
+      this.openSnackBar("למוצר זה לא נמצאו נוטריאנטים", "סגור", 1000);
+    }
   }
 
   /**

@@ -29,10 +29,11 @@
             <mat-form-field class="dropdown" matTooltip="בחירת שם המוצר הכי דומה, למשיכת הנוטריאנטים הכי מדוייקים"
               [matTooltipShowDelay]=500>
               <mat-label>שם מוצר</mat-label>
-              <mat-select (selectionChange)="row.setProductNameChosen($event.value)">
+              <!-- <mat-select [(value)]="row.optionalProductsChosen" (selectionChange)="row.setProductNameChosen($event.value)"> -->
+              <mat-select [(value)]="row.optionalProductsChosen">
                 <mat-option>---</mat-option>
-                <mat-option *ngFor="let foodName of foodNames;let i = index" [value]="foodName" class="dropdown-value">
-                  {{foodName}}
+                <mat-option *ngFor="let optionalProduct of row.optionalProducts;let i = index" [value]="optionalProduct" class="dropdown-value">
+                  {{optionalProduct.name}}
                 </mat-option>
               </mat-select>
             </mat-form-field>

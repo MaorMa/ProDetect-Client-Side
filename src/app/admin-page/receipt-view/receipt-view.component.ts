@@ -15,7 +15,7 @@ export class ReceiptViewComponent implements OnInit {
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   familyUploadsJson: any[][];
   families: string[] = [];
-  allData: ReceiptToReturnList[] = [];
+  allData: ReceiptToReturnList = null;
   allFamilyData: ReceiptToReturnList;
   selectedFamily: string = "";
   amountOfRec: number = 0;
@@ -27,26 +27,32 @@ export class ReceiptViewComponent implements OnInit {
   isLoading: boolean = true;
 
   constructor(private researcherService: ResearcherService) {
-    this.researcherService.GetAllApprovedData().subscribe((resValue) => {
-      console.log(JSON.parse(resValue));
-      for (let pair of JSON.parse(resValue)) {
-        this.allData.push(new ReceiptToReturnList().deserialize(pair));
-        this.families.push(pair.Key);
-      }
-      this.isLoading = false;
-      // console.log(this.allData);
-    });
   }
 
   ngOnInit() {
+    this.getAllFamilies();
+  }
+
+  getAllFamilies(): void {
+    this.researcherService.GetAllFamilies("View").subscribe((resValue) => {
+      this.families = JSON.parse(resValue);
+      this.isLoading = false;
+    });
   }
 
   familyChanged(index: number): void {
     this.currIndex = index;
     this.paginator.pageIndex = 0;
-    this.amountOfRec = this.allData[index].Value.length;
-    this.allFamilyData = this.allData[index];
-    this.table.updateAllTableData(this.allFamilyData);
+    this.isLoading = true;
+    this.researcherService.GetAllApprovedData(this.families[index]).subscribe((resValue) => {
+      // console.log(JSON.parse(resValue));
+      this.allData = new ReceiptToReturnList().deserialize(JSON.parse(resValue));
+      this.allFamilyData = this.allData;
+      this.isLoading = false;
+      this.amountOfRec = this.allData.Value.length;
+      this.table.updateAllTableData(this.allFamilyData);
+      // console.log(this.allData);
+    });
   }
 
   pageChange(index: PageEvent): void {

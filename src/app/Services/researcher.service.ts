@@ -23,8 +23,16 @@ export class ResearcherService {//TODO - chec if token necc for all gets
     return this.http.post<any>(this.apiUrl + "Receipt/GetAllRecognizedData/", '', this.getTokenHeader());
   }
 
-  GetAllApprovedData(): Observable<any> {
-    return this.http.post<any>(this.apiUrl + "Receipt/GetAllApprovedData/", '', this.getTokenHeader());
+  GetAllFamilies(accView: string): Observable<any> {
+    return this.http.post<any>(this.apiUrl + "Receipt/GetAllFamilies/" + accView, '', this.getTokenHeader());
+  }
+
+  GetAllFamilyData(familyID: string): Observable<any> {
+    return this.http.post<any>(this.apiUrl + "Receipt/GetAllFamilyData/" + familyID, '', this.getTokenHeader());
+  }
+
+  GetAllApprovedData(familyID: string): Observable<any> {
+    return this.http.post<any>(this.apiUrl + "Receipt/GetAllApprovedData/" + familyID, '', this.getTokenHeader());
   }
 
   GetAllDataForMarketAndProductID(marketID: string, productID: number): Observable<any> {
@@ -33,6 +41,10 @@ export class ResearcherService {//TODO - chec if token necc for all gets
 
   SaveCurrentReceipt(currTableData: ReceiptToReturn, selectedFamily: string): Observable<any> {
     return this.http.post<any>(this.apiUrl + "Receipt/UpdateReceiptData/" + selectedFamily, currTableData, this.getTokenHeader());
+  }
+
+  DeleteCurrReceipt(receiptId: string): any {
+    return this.http.post<any>(this.apiUrl + "Receipt/DeleteReceipt/" + receiptId, '', this.getTokenHeader());
   }
 
   CreateNewUser(familyName: string, password: string): Observable<any> {

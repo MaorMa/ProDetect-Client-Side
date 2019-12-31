@@ -37,6 +37,7 @@ import { ViewTableComponent } from './admin-page/receipt-view/view-table/view-ta
 import { AddFamilyComponent } from './admin-page/add-family/add-family.component';
 import { LoadingSpinnerComponent } from './login-page/loading-spinner/loading-spinner.component';
 import { baseURLService } from './Services/base-urlservice.service';
+import { NutrientViewComponent } from './admin-page/receipt-view/view-table/nutrient-view/nutrient-view.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { baseURLService } from './Services/base-urlservice.service';
     ReceiptViewComponent,
     ViewTableComponent,
     AddFamilyComponent,
-    LoadingSpinnerComponent
+    LoadingSpinnerComponent,
+    NutrientViewComponent
   ],
   imports: [
     BrowserModule,
@@ -95,6 +97,6 @@ import { baseURLService } from './Services/base-urlservice.service';
     // }
   ],
   bootstrap: [AppComponent],
-  entryComponents: [AdminUpdateComponent, AdminCreateComponent]
+  entryComponents: [AdminUpdateComponent, AdminCreateComponent, NutrientViewComponent]
 })
 export class AppModule { }

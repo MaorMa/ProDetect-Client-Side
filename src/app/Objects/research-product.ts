@@ -1,44 +1,45 @@
 export class ResearchProduct {
     private sID: string;
     private name: string;
+    private similarity: string;
+
+    constructor(){
+        this.sID = "";
+        this.name = "";
+        this.similarity = "";
+    }
 
     deserialize(input: any): this {
+        // console.log(input)
         this.sID = input.sID;
         this.name = input.name;
+        this.similarity = input.similarity;
         return this;
     }
 
     //#region
-    /**
-     * Getter $sID
-     * @return {string}
-     */
-	public get $sID(): string {
+	public getsID(): string {
 		return this.sID;
 	}
 
-    /**
-     * Getter $name
-     * @return {string}
-     */
-	public get $name(): string {
+	public getName(): string {
 		return this.name;
+    }
+    
+	public getSimilarity(): string {
+		return this.similarity;
 	}
 
-    /**
-     * Setter $sID
-     * @param {string} value
-     */
-	public set $sID(value: string) {
+	public setsID(value: string) {
 		this.sID = value;
 	}
 
-    /**
-     * Setter $name
-     * @param {string} value
-     */
-	public set $name(value: string) {
+	public setName(value: string) {
 		this.name = value;
+    }
+
+	public setSimilarity(value: string) {
+		this.similarity = value;
 	}
     //#endregion
 
