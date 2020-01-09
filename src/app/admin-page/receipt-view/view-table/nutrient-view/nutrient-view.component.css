@@ -1,8 +1,4 @@
 * {
     direction: rtl;
-}
-
-th,
-td {
     text-align: right;
 }

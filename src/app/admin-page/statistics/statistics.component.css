@@ -1,0 +1,37 @@
+.card-header {
+    text-align: center;
+}
+
+.card-body {
+    align-content: right;
+}
+
+.card {
+    margin-top: 15px;
+}
+
+.flex-container {
+    display: flex;
+    justify-content: center;
+    align-content: stretch;
+}
+
+.alert {
+    direction: rtl;
+    text-align: center;
+}
+
+.mat-form {
+    text-align: center;
+}
+
+.main-div {
+    justify-content: center;
+    align-items: center;
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-image: url(../../../assets/background.jpg);
+}

@@ -24,7 +24,7 @@ export class ReceiptAcceptComponent implements OnInit {
   pageEvent: PageEvent;
   currIndex: number;
   currentReceiptStatus: string = "0";
-  currReceiptUploadTime: Date;
+  currReceiptUploadTime: string;
   isLoading: boolean = true;
 
   constructor(private researcherService: ResearcherService) {
@@ -53,7 +53,7 @@ export class ReceiptAcceptComponent implements OnInit {
     this.allData = null;
     this.amountOfRec = 0;
     this.researcherService.GetAllFamilyData(this.families[index]).subscribe((resValue) => {
-      // console.log(JSON.parse(resValue));
+      console.log(JSON.parse(resValue));
       this.allData = new ReceiptToReturnList().deserialize(JSON.parse(resValue));
       this.amountOfRec = this.allData.Value.length;
       this.allFamilyData = this.allData;

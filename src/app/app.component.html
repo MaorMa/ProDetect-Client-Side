@@ -19,9 +19,11 @@
     </div>
     <div class="menu-spacer"></div>
     <div class="nav">
-      <button mat-button [matMenuTriggerFor]="adminMenu">ממשק חוקר</button>
-      <button mat-button [routerLink]="['user']">ממשק משתמש</button>
-      <button mat-button [routerLink]="['login']" *ngIf='tokenExists()'>התחברות</button>
+      <button mat-button [matMenuTriggerFor]="adminMenu" [hidden]='tokenExists()'>ממשק חוקר</button>
+      <button mat-button [matMenuTriggerFor]="viewMenu" [hidden]='tokenExists()'>צפייה בנתונים</button>
+
+      <button mat-button [routerLink]="['user']" [hidden]='tokenExists()'>העלאת קבלות</button>
+      <button mat-button [routerLink]="['login']" [hidden]='!tokenExists()'>התחברות</button>
     </div>
   </mat-toolbar-row>
 
@@ -29,9 +31,15 @@
 
 <mat-menu #adminMenu="matMenu">
   <ng-template matMenuContent let-name="name">
-    <button mat-menu-item [routerLink]="['receiptsAccept']"> קבלות שטרם אושרו</button>
-    <button mat-menu-item [routerLink]="['receiptsView']"> קבלות מאושרות </button>
-    <button mat-menu-item [routerLink]="['addFamily']">הוספת משפחות</button>
+    <button mat-menu-item [routerLink]="['receiptsAccept']">קבלות שממתינות לאישור</button>
+    <button mat-menu-item [routerLink]="['addFamily']">הוספת משפחה למערכת</button>
+  </ng-template>
+</mat-menu>
+
+<mat-menu #viewMenu="matMenu">
+  <ng-template matMenuContent let-name="name">
+    <button mat-menu-item [routerLink]="['receiptsView']">צפיה בקבלות מאושרות</button>
+    <button mat-menu-item [routerLink]="['statistics']">צפייה בסטטיסטיקה</button>
   </ng-template>
 </mat-menu>
 

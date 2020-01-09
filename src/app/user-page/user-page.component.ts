@@ -70,7 +70,7 @@ export class UserPageComponent implements OnInit {
   uploadFiles() {
     this.uploading = true;
     this.fileUploadService.postFile(this.selectedFamily, Markets[this.selectedMarket], this.filesToUpload).subscribe(data => {
-      console.log("Success: " + data);
+      // console.log("Success: " + data);
       this.openSnackBar("התמונות הועלו בהצלחה", "סגור", 5000);
       this.resetAllFields();
     }, error => {

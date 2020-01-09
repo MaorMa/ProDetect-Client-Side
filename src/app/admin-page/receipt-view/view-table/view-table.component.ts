@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { MatSnackBar, MatDialog, MatDialogConfig } from '@angular/material';
 import { ReceiptToReturnList } from 'src/app/Objects/receipt-to-return-list';
 import { ReceiptToReturn } from 'src/app/Objects/receipt-to-return';
@@ -6,6 +6,9 @@ import { MetaData } from 'src/app/Objects/meta-data';
 import { Angular5Csv } from 'angular5-csv/dist/Angular5-csv';
 import { Markets } from 'src/app/markets.enum';
 import { NutrientViewComponent } from './nutrient-view/nutrient-view.component';
+import { ResearcherService } from 'src/app/Services/researcher.service';
+import { LoginService } from 'src/app/Services/login.service';
+
 
 @Component({
   selector: 'app-view-table',
@@ -13,16 +16,36 @@ import { NutrientViewComponent } from './nutrient-view/nutrient-view.component';
   styleUrls: ['./view-table.component.css']
 })
 export class ViewTableComponent implements OnInit {
+  @Output() backToAcceptEmitter: EventEmitter<ReceiptToReturn> = new EventEmitter();
   allTableData: ReceiptToReturnList;
   currReceipt: ReceiptToReturn = new ReceiptToReturn();
   currTableData: MetaData[] = [];
   currRecIndex: number;
   currMarket: string;
   currHebMarket: string;
+  uploadTime: string;
+  admin: boolean = false;
+  token:string = sessionStorage.getItem('token');
 
-  constructor(private snackBar: MatSnackBar, private dialog: MatDialog) { }
+  constructor(private dialog: MatDialog, private researcherService: ResearcherService,
+    private loginService: LoginService) {
+      this.detectIfAdmin();
+    }
 
   ngOnInit() {
+  }
+
+  detectIfAdmin(){
+    this.loginService.isAdmin((this.token)).subscribe(
+      (resValue: any) => {
+        if (resValue) {
+          this.admin = resValue['body'] === true;
+        }
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 
   /**
@@ -42,6 +65,7 @@ export class ViewTableComponent implements OnInit {
   updateDataIndex(index: number): void {
     // console.log(index)
     this.currMarket = this.allTableData['Value'][index]['marketID'];
+    this.uploadTime = this.allTableData['Value'][index]['uploadTime'];
     for (var n in Markets) {
       if (Markets[n] === this.currMarket)
         this.currHebMarket = n;
@@ -53,17 +77,18 @@ export class ViewTableComponent implements OnInit {
   }
 
   loadNutriantsModal(row: any) {
+    // console.log(row)
     if (row.nutrients.length != 0) {
       const editDialogConfig = new MatDialogConfig();
       editDialogConfig.disableClose = false;
       editDialogConfig.autoFocus = true;
-      editDialogConfig.maxWidth = "25%";
+      editDialogConfig.maxWidth = "55%";
       editDialogConfig.maxHeight = "85%";
-      editDialogConfig.data = { Nutrients: row.nutrients };
+      editDialogConfig.data = { Nutrients: row.nutrients, ProductName: row.description };
       var dialogRef = this.dialog.open(NutrientViewComponent, editDialogConfig);
     }
     else {
-      this.openSnackBar("למוצר זה לא נמצאו נוטריאנטים", "סגור", 1000);
+      this.researcherService.openSnackBar("למוצר זה לא נמצאו נוטריאנטים", "סגור", 1000);
     }
   }
 
@@ -90,15 +115,9 @@ export class ViewTableComponent implements OnInit {
     new Angular5Csv(withoutValidProductAttribute, this.currReceipt.receiptID, options);
   }
 
-  /**
-* Open a snack bar with information for the user
-* @param message - value to show in snackBar
-* @param action - value to show in Button in shnackBar
-* @param duration 
-*/
-  openSnackBar(message: string, action: string, duration: number): void {
-    this.snackBar.open(message, action, {
-      duration: duration,
-    });
+  returnToAccept(): void {
+    if (confirm("קבלה זו תעבור ל'קבלות שטרם אושרו'. את/ה בטוח/ה?")) {
+      this.backToAcceptEmitter.emit(this.currReceipt);
+    }
   }
 }

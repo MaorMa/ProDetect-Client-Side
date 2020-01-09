@@ -3,6 +3,8 @@ import { ViewTableComponent } from './view-table/view-table.component';
 import { MatPaginator, PageEvent } from '@angular/material';
 import { ReceiptToReturnList } from 'src/app/Objects/receipt-to-return-list';
 import { ResearcherService } from 'src/app/Services/researcher.service';
+import { ReceiptToReturn } from 'src/app/Objects/receipt-to-return';
+import { Timestamp } from 'rxjs/internal/operators/timestamp';
 
 @Component({
   selector: 'app-receipt-view',
@@ -23,7 +25,7 @@ export class ReceiptViewComponent implements OnInit {
   pageEvent: PageEvent;
   currIndex: number;
   currentReceiptStatus: string = "0";
-  currReceiptUploadTime: Date;
+  currReceiptUploadTime: string;
   isLoading: boolean = true;
 
   constructor(private researcherService: ResearcherService) {
@@ -37,6 +39,10 @@ export class ReceiptViewComponent implements OnInit {
     this.researcherService.GetAllFamilies("View").subscribe((resValue) => {
       this.families = JSON.parse(resValue);
       this.isLoading = false;
+      this.selectedFamily = '';
+      this.allData = null;
+      this.allFamilyData = null;
+      this.amountOfRec = 0;
     });
   }
 
@@ -59,6 +65,21 @@ export class ReceiptViewComponent implements OnInit {
     this.table.updateDataIndex(index.pageIndex);
     this.currentReceiptStatus = this.allFamilyData['Value'][index.pageIndex]['status'];
     this.currReceiptUploadTime = this.allFamilyData['Value'][index.pageIndex]['uploadTime'];
+  }
+
+  backToAcceptCurrReceipt(receipt: ReceiptToReturn): void {
+    console.log(receipt)
+    this.researcherService.returnToAccept(this.families[this.selectedFamily], receipt).subscribe(resValue => {
+      this.researcherService.openSnackBar("הקבלה עברה למסך קבלות שטרם אושרו לתיקון", "סגור", 1000);
+      if (this.allData.Value.length == 1) {
+        this.getAllFamilies();
+      }
+      else {
+        this.familyChanged(this.currIndex);
+      }
+    }, error => {
+      this.researcherService.openSnackBar("שגיאה בעת העברת הקבלה לקבלות שטרם אושרו", "סגור", 1000);
+    })
   }
 
 }

@@ -11,5 +11,4 @@ export class AppComponent{
   tokenExists(): boolean {
     return sessionStorage.getItem('token') == null;
   }
-
 }

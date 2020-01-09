@@ -9,7 +9,7 @@ import { baseURLService } from './base-urlservice.service';
 @Injectable({
   providedIn: 'root'
 })
-export class ResearcherService {//TODO - chec if token necc for all gets
+export class ResearcherService {
 
   apiUrl: string = 'http://localhost:59416/api/';
   // apiUrl: string = 'http://proj.ise.bgu.ac.il/Proj-RR/backend/api/';
@@ -52,6 +52,10 @@ export class ResearcherService {//TODO - chec if token necc for all gets
     formData.append("username", familyName);//Form
     formData.append("password", password);//Form
     return this.http.post<any>(this.apiUrl + "Users/AddFamilyUser/", formData, this.getTokenHeader());
+  }
+
+  returnToAccept(familyID: string, receipt: ReceiptToReturn) {
+    return this.http.post<any>(this.apiUrl + "Receipt/ReturnToAccept/" + familyID, receipt, this.getTokenHeader());
   }
 
   //Get info from server 

@@ -22,9 +22,10 @@ export class AdminTableComponent implements OnInit {
   currTableData: MetaData[] = [];
   currRecIndex: number;
   currMarket: string;
+  uploadTime: string;
   deletedHistory: any[] = [];
 
-  constructor(private dialog: MatDialog, private snackBar: MatSnackBar, private researcherService: ResearcherService) { }
+  constructor(private dialog: MatDialog, private researcherService: ResearcherService) { }
 
   ngOnInit() {
   }
@@ -55,8 +56,9 @@ export class AdminTableComponent implements OnInit {
    */
   updateDataIndex(index: number): void {
     // console.log(index)
-    this.currMarket = this.allTableData['Value'][index]['marketID']
+    this.currMarket = this.allTableData['Value'][index]['marketID'];
     this.currTableData = this.allTableData['Value'][index]['products'];
+    this.uploadTime = this.allTableData['Value'][index]['uploadTime'];
     this.currReceipt = this.allTableData['Value'][index];
     this.currRecIndex = index;
     // console.log(this.allTableData);
@@ -118,7 +120,7 @@ export class AdminTableComponent implements OnInit {
   }
 
   saveCurrReceipt(): void {
-    // console.log(this.allTableData['Value'][this.currRecIndex]);
+    console.log(this.allTableData['Value'][this.currRecIndex]);
     if (confirm("האם לשמור קבלה זו? לאחר השמירה, הקבלה לא תוצג שנית")) {
       this.researcherService.SaveCurrentReceipt(this.allTableData['Value'][this.currRecIndex], this.selectedFamily).subscribe(
         (resValue) => {

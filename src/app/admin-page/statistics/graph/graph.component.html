@@ -1,0 +1,9 @@
+<mat-radio-group style="direction: rtl;" class="d-flex justify-content-center" aria-label="Select an option">
+    <mat-radio-button value="pie">&nbsp; גרף עוגה &nbsp;</mat-radio-button>
+    <mat-radio-button value="bars">&nbsp; גרף עמודות &nbsp;</mat-radio-button>
+</mat-radio-group>
+<div style="width:800px; margin:0 auto;">
+    <canvas baseChart [chartType]="'pie'" [datasets]="chartData" [labels]="chartLabels" [options]="chartOptions"
+        [legend]="true" (chartClick)="onChartClick($event)">
+    </canvas>
+</div>

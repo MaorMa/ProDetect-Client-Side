@@ -7,13 +7,15 @@ import { ReceiptAcceptComponent } from './admin-page/receipt-accept/receipt-acce
 import { ReceiptViewComponent } from './admin-page/receipt-view/receipt-view.component';
 import { AuthGuardAdminService } from './Services/auth-guard-admin.service';
 import { AddFamilyComponent } from './admin-page/add-family/add-family.component';
+import { StatisticsComponent } from './admin-page/statistics/statistics.component';
 
 const routes: Routes = [
   { path: '', component: LoginPageComponent },
   { path: 'user', component: UserPageComponent, canActivate: [AuthGuard], data:{role: 'user'} },
-  { path: 'receiptsAccept', component: ReceiptAcceptComponent, canActivate: [AuthGuard],data:{role: 'receiptsAccept'}},
+  { path: 'receiptsAccept', component: ReceiptAcceptComponent, canActivate: [AuthGuardAdminService],data:{role: 'receiptsAccept'}},
   { path: 'receiptsView', component: ReceiptViewComponent, canActivate: [AuthGuard], data:{role: 'receiptsView'} },
-  { path: 'addFamily', component: AddFamilyComponent, canActivate: [AuthGuard], data:{role: 'addFamily'} },
+  { path: 'statistics', component: StatisticsComponent, canActivate: [AuthGuard], data:{role: 'statistics'} },
+  { path: 'addFamily', component: AddFamilyComponent, canActivate: [AuthGuardAdminService], data:{role: 'addFamily'} },
   { path: '**', redirectTo: '', pathMatch: 'full' },
   
 ];

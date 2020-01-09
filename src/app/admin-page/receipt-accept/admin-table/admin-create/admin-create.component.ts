@@ -14,6 +14,7 @@ export class AdminCreateComponent implements OnInit {
   @Output() createEmitter = new EventEmitter();
   createForm: FormGroup;
   infoReceived: boolean = false;
+  optionalProducts: string;
 
   constructor(private formbulider: FormBuilder, @Inject(MAT_DIALOG_DATA) public data: any, private snackBar: MatSnackBar, private researcherService: ResearcherService) { }
 
@@ -22,22 +23,25 @@ export class AdminCreateComponent implements OnInit {
     this.createForm = this.formbulider.group({
       sID: ['', [Validators.required]],
       Description: [{ value: '', disabled: true }],
-      Quantity: [{ value: 0, disabled: true }],
+      Quantity: [{ value: 1, disabled: true }],
       Price: [{ value: 0, disabled: true }],
     });
   }
 
   getProductInfo(): void {
     this.researcherService.GetAllDataForMarketAndProductID(this.data['marketID'], this.createForm.value.sID).subscribe((resValue) => {
-      // console.log(resValue.length)
-      if (resValue.length == 0) {
+      // console.log(JSON.parse(resValue))
+      if (JSON.parse(resValue).length == 0) {
         this.createForm.get('Description').enable();
         this.createForm.get('Price').enable();
         this.createForm.get('Quantity').enable();
         this.openSnackBar('מוצר זה לא קיים במערכת, אנא מלאו את הפרטים ידנית', 'סגור', 2000);
       }
       else {
-        var productInfo = resValue[0].split(',');
+        var data = JSON.parse(resValue);//Data = array with 1 cell with Key- product data, Value- optional products
+        // console.log(data[0].Value)
+        var productInfo = data[0].Key[0].split(',');
+        this.optionalProducts = data[0].Value;
         this.createForm.get('Description').setValue(productInfo[1]);
         this.createForm.get('Description').enable();
         this.createForm.get('Price').setValue(productInfo[2]);
@@ -58,6 +62,7 @@ export class AdminCreateComponent implements OnInit {
     productLine['quantity'] = createFormValue.Quantity;
     productLine['price'] = createFormValue.Price;
     productLine['validProduct'] = true;
+    productLine.setOptionalProducts(this.optionalProducts);
     // console.log(productLine)
     this.createEmitter.emit(productLine);
   }

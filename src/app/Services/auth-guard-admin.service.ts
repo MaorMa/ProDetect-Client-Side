@@ -7,9 +7,7 @@ import { LoginService } from './login.service';
   providedIn: 'root'
 })
 export class AuthGuardAdminService {
-
-
-  isAdmin: boolean = false;
+  isAdmin: boolean;
 
   constructor(private http: HttpClient, private router: Router, 
     private loginService: LoginService) { }
@@ -20,17 +18,16 @@ export class AuthGuardAdminService {
     this.loginService.isAdmin((token))
       .subscribe(
         (resValue: any) => {
-          if (resValue) {
+          if(resValue){
             this.isAdmin = resValue['body'] === true;
-            if (this.isAdmin) {
+            if(this.isAdmin){
               // console.log(role);
-              // this.router.navigate([role]);
+              this.router.navigate([role]);
             }
           }
         },
-        error => {
-        });
-    return this.isAdmin;
+          error => {
+          });
+        return this.isAdmin;
   }
-
 }

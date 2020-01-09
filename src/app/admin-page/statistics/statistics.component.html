@@ -25,12 +25,5 @@
             </div>
         </div>
     </div>
-    <div class="card mb-4 shadow-sm" id="page" [hidden]="!allData">
-        <mat-paginator [length]="amountOfRec" [pageSize]=1 (page)="pageChange($event)" matTooltip="מעבר בין קבלות"
-            [matTooltipShowDelay]=1000>
-        </mat-paginator>
-        <div class='flex-container' [hidden]='selectedFamily === ""'>
-            <app-view-table #table (backToAcceptEmitter)="backToAcceptCurrReceipt($event)"></app-view-table>
-        </div>
-    </div>
-</div>
+</div><br>
+<app-graph></app-graph>

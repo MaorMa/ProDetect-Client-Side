@@ -1,12 +1,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <div class="table-responsive">
-    <label>{{currHebMarket}}</label>
+    <div class="d-flex justify-content-between">
+        <div class="upload_time_and_market">
+            <mat-icon inline=true>shopping_cart</mat-icon>
+            רשת {{currHebMarket}} &nbsp;
+            <mat-icon inline=true>access_time</mat-icon>
+            תאריך העלאה: {{this.uploadTime | date:'shortDate'}}
+        </div>
+        <button [hidden]="!this.admin" mat-icon-button (click)="returnToAccept()"
+            matTooltip="קבלה זו תחזור לקבלות שטרם אושרו" [matTooltipShowDelay]=500>
+            <mat-icon>build</mat-icon>
+        </button>
+    </div>
     <table class="table">
         <thead>
             <tr>
                 <th>מק"ט</th>
                 <th>שם מוצר</th>
-                <th>כמות</th>
+                <th>כמות (ק"ג/ליטר)</th>
                 <th>נוטריאנטים</th>
                 <th>מחיר</th>
             </tr>

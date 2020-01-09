@@ -1,10 +1,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<button [disabled]="this.deletedHistory[this.currRecIndex] == undefined 
+<div class="d-flex justify-content-between">
+  <div class="upload_time">
+    <mat-icon inline=true>access_time</mat-icon>
+    תאריך העלאה: {{this.uploadTime | date:'shortDate'}}
+  </div>
+  <button [disabled]="this.deletedHistory[this.currRecIndex] == undefined 
 || this.deletedHistory[this.currRecIndex].length == 0" mat-icon-button (click)="undo()"
-  matTooltip="מוצר שנמחק יחזור לסוף הרשימה" [matTooltipShowDelay]=500>
-  <mat-icon>undo</mat-icon>
-</button>
-
+    matTooltip="מוצר שנמחק יחזור לסוף הרשימה" [matTooltipShowDelay]=500>
+    <mat-icon>undo</mat-icon>
+  </button>
+</div>
 <div class="table-responsive">
   <table class="table">
     <thead>
@@ -19,7 +24,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr [ngStyle]="{'border': '1.34px solid #bbbdba'}" *ngFor="let row of currTableData; let i = index">
+      <tr *ngFor="let row of currTableData; let i = index">
         <td [ngStyle]="{'background-color': (!row.validProduct) ? 'mistyrose' : '#c2efae'}">{{row.sID}}</td>
         <td>{{row.description}}</td>
         <td>{{row.quantity}}</td>
@@ -31,8 +36,9 @@
               <mat-label>שם מוצר</mat-label>
               <!-- <mat-select [(value)]="row.optionalProductsChosen" (selectionChange)="row.setProductNameChosen($event.value)"> -->
               <mat-select [(value)]="row.optionalProductsChosen">
-                <mat-option>---</mat-option>
-                <mat-option *ngFor="let optionalProduct of row.optionalProducts;let i = index" [value]="optionalProduct" class="dropdown-value">
+                <mat-option class="dropdown-value">--- אין מוצר מתאים ---</mat-option>
+                <mat-option *ngFor="let optionalProduct of row.optionalProducts;let i = index" [value]="optionalProduct"
+                  class="dropdown-value">
                   {{optionalProduct.name}}
                 </mat-option>
               </mat-select>

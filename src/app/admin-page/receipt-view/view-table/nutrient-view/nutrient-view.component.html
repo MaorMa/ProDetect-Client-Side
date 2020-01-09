@@ -1,15 +1,26 @@
 <mat-dialog-content>
     <mat-card-content class="cards">
+        <mat-card-header>
+            <div>
+                <mat-card-title>{{data.ProductName}}</mat-card-title>
+            </div>
+            <div>
+                <mat-card-subtitle>מקמו את העכבר על הנוטריאט בכדי לראות את שמו</mat-card-subtitle>
+            </div>
+        </mat-card-header>
+        <hr>
         <div class="table-responsive">
             <table class="table table-sm table-hover">
                 <thead class="thead-light">
                     <tr>
+                        <!-- <th scope="col">שם מקור</th> -->
                         <th scope="col">נוטריאנט</th>
                         <th scope="col">ערך</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let row of nutrientsToShow">
+                    <tr *ngFor="let row of nutrientsToShow" [matTooltip]="this.nutEnum[row.code]">
+                        <!-- <td> {{this.nutEnum[row.code]}}</td> -->
                         <td> {{row.code}}</td>
                         <td> {{row.value | number}}</td>
                     </tr>

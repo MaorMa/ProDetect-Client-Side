@@ -10,7 +10,7 @@ export class MetaData {
     private yCoordinate: number = 0;
     private nutrients: Nutrient[];
     private optionalProducts: ResearchProduct[] = [];
-    private optionalProductsChosen: ResearchProduct
+    private optionalProductsChosen: ResearchProduct = new ResearchProduct();
 
     deserialize(input: any): this {
         this.sID = input.sID;
@@ -21,20 +21,14 @@ export class MetaData {
         this.nutrients = [];
         // console.log(input.nutrients)
         if (input.nutrients && input.nutrients.length != 0) {
-            input.nutrients.splice(0,2);
-            // console.log(input.nutrients)
-            input.nutrients.forEach((nutrient, index) => {
-                this.nutrients.push(new Nutrient().deserialize(nutrient, index));
+            input.nutrients.forEach((nutrient) => {
+                this.nutrients.push(new Nutrient().deserialize(nutrient));
             });
         }
         if (input.optionalProducts) {
-            if (input.optionalProducts.length == 0) {
-                this.optionalProducts = [new ResearchProduct()];
-            }
-            else {
-                for (let optionalProduct of input.optionalProducts)
-                    this.optionalProducts.push(new ResearchProduct().deserialize(optionalProduct));
-            }
+            for (let optionalProduct of input.optionalProducts)
+                this.optionalProducts.push(new ResearchProduct().deserialize(optionalProduct));
+            // }
             this.optionalProductsChosen = this.optionalProducts[0];
         }
         return this;
@@ -54,5 +48,13 @@ export class MetaData {
 
     getPrice() {
         return this.price;
+    }
+
+    setOptionalProducts(input: any) {
+        if (input) {
+            for (let optionalProduct of input)
+                this.optionalProducts.push(new ResearchProduct().deserialize(optionalProduct));
+            this.optionalProductsChosen = this.optionalProducts[0];
+        }
     }
 }

@@ -27,7 +27,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatDialogModule } from '@angular/material/dialog';
-import { MatFormFieldModule, MatInputModule, MatCardModule, MatTableModule, MatMenuModule, MatToolbarModule } from '@angular/material';
+import { MatFormFieldModule, MatInputModule, MatCardModule, MatTableModule, MatMenuModule, MatToolbarModule, MatRadioModule } from '@angular/material';
 import { ReceiptAcceptComponent } from './admin-page/receipt-accept/receipt-accept.component';
 import { AdminTableComponent } from './admin-page/receipt-accept/admin-table/admin-table.component';
 import { AdminUpdateComponent } from './admin-page/receipt-accept/admin-table/admin-update/admin-update.component';
@@ -38,6 +38,9 @@ import { AddFamilyComponent } from './admin-page/add-family/add-family.component
 import { LoadingSpinnerComponent } from './login-page/loading-spinner/loading-spinner.component';
 import { baseURLService } from './Services/base-urlservice.service';
 import { NutrientViewComponent } from './admin-page/receipt-view/view-table/nutrient-view/nutrient-view.component';
+import { StatisticsComponent } from './admin-page/statistics/statistics.component';
+import { ChartsModule } from 'ng2-charts';
+import { GraphComponent } from './admin-page/statistics/graph/graph.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +55,9 @@ import { NutrientViewComponent } from './admin-page/receipt-view/view-table/nutr
     ViewTableComponent,
     AddFamilyComponent,
     LoadingSpinnerComponent,
-    NutrientViewComponent
+    NutrientViewComponent,
+    StatisticsComponent,
+    GraphComponent
   ],
   imports: [
     BrowserModule,
@@ -78,10 +83,12 @@ import { NutrientViewComponent } from './admin-page/receipt-view/view-table/nutr
     MatFormFieldModule,
     MatInputModule,
     MatToolbarModule,
+    MatRadioModule,
     //Login
     MatCardModule,
     MatTableModule,
     MatMenuModule,
+    ChartsModule
   ],
   providers: [FileUploadService, GetSettingsService, AuthGuard,
     // {
