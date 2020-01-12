@@ -8,8 +8,7 @@
         <div *ngIf="!isLoading" class="card mb-4 shadow-sm" id="familyID" matTooltip="משפחות שהעלו קבלות"
             [matTooltipShowDelay]=1000>
             <div class="card-header">
-                <mat-icon [(matBadge)]="amountOfRec" matBadgeOverlap="true" matBadgeColor="primary"
-                    matBadgeSize="medium">
+                <mat-icon>
                     group
                 </mat-icon>
             </div>
@@ -25,5 +24,23 @@
             </div>
         </div>
     </div>
-</div><br>
-<app-graph></app-graph>
+</div>
+<div class="tabs" *ngIf='allData || compareData' style="margin-bottom: 10px">
+    <mat-tab-group style="min-height: -webkit-fill-available" mat-align-tabs="center" class="tabs" (selectedTabChange)="tabChanged($event)" [selectedIndex]="index">
+        <mat-tab label="התפלגות מחירים לפי קטגוריה" class="graph">
+            <ng-template matTabContent>
+                <app-graph [graphData]='this.allData' [title]='title'></app-graph>
+            </ng-template>
+        </mat-tab>
+        <mat-tab label="התפלגות צריכה לפי קטגוריה" class="graph">
+            <ng-template matTabContent>
+                <app-graph [graphData]='this.allData' [title]='title'></app-graph>
+            </ng-template>
+        </mat-tab>
+        <mat-tab label="השוואת הוצאות לאחרים" class="graph">
+            <ng-template matTabContent>
+                <app-graph-compare [graphData]='this.compareData' [title]='title'></app-graph-compare>
+            </ng-template>
+        </mat-tab>
+    </mat-tab-group>
+</div>

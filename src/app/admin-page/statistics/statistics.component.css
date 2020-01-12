@@ -35,3 +35,11 @@
     background-size: cover;
     background-image: url(../../../assets/background.jpg);
 }
+
+.graph{
+    margin-top: 5px;
+}
+
+.tabs{
+    direction: rtl;
+}

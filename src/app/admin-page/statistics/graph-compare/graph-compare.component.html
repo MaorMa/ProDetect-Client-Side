@@ -1,0 +1,7 @@
+<mat-card class="d-flex justify-content-center card-header">{{title}}</mat-card>
+
+<div *ngIf="done" style="width:800px; margin:0 auto;">
+    <canvas baseChart [chartType]="chartType" [datasets]="chartData" [labels]="chartLabels" [options]="chartOptions"
+        [legend]="true" (chartClick)="onChartClick($event)">
+    </canvas>
+</div>

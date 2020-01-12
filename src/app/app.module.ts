@@ -27,7 +27,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatDialogModule } from '@angular/material/dialog';
-import { MatFormFieldModule, MatInputModule, MatCardModule, MatTableModule, MatMenuModule, MatToolbarModule, MatRadioModule } from '@angular/material';
+import { MatFormFieldModule, MatInputModule, MatSlideToggleModule, MatCardModule, MatTableModule, MatMenuModule, MatToolbarModule, MatRadioModule } from '@angular/material';
 import { ReceiptAcceptComponent } from './admin-page/receipt-accept/receipt-accept.component';
 import { AdminTableComponent } from './admin-page/receipt-accept/admin-table/admin-table.component';
 import { AdminUpdateComponent } from './admin-page/receipt-accept/admin-table/admin-update/admin-update.component';
@@ -41,6 +41,7 @@ import { NutrientViewComponent } from './admin-page/receipt-view/view-table/nutr
 import { StatisticsComponent } from './admin-page/statistics/statistics.component';
 import { ChartsModule } from 'ng2-charts';
 import { GraphComponent } from './admin-page/statistics/graph/graph.component';
+import { GraphCompareComponent } from './admin-page/statistics/graph-compare/graph-compare.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { GraphComponent } from './admin-page/statistics/graph/graph.component';
     LoadingSpinnerComponent,
     NutrientViewComponent,
     StatisticsComponent,
-    GraphComponent
+    GraphComponent,
+    GraphCompareComponent
   ],
   imports: [
     BrowserModule,
@@ -84,6 +86,7 @@ import { GraphComponent } from './admin-page/statistics/graph/graph.component';
     MatInputModule,
     MatToolbarModule,
     MatRadioModule,
+    MatSlideToggleModule,
     //Login
     MatCardModule,
     MatTableModule,

@@ -1,9 +1,16 @@
-<mat-radio-group style="direction: rtl;" class="d-flex justify-content-center" aria-label="Select an option">
-    <mat-radio-button value="pie">&nbsp; גרף עוגה &nbsp;</mat-radio-button>
-    <mat-radio-button value="bars">&nbsp; גרף עמודות &nbsp;</mat-radio-button>
+<mat-card class="d-flex justify-content-center card-header">{{title}}</mat-card>
+
+<mat-radio-group [(ngModel)]="selectedGraph" style="direction: rtl;" class="d-flex justify-content-center">
+    <mat-radio-button *ngFor="let graph of graphs" [value]="graph" [checked]="graph.selected">&nbsp;
+        {{graph.description}}
+    </mat-radio-button>
+
+    <!-- <mat-radio-button value="pie">&nbsp; גרף עוגה &nbsp;</mat-radio-button>
+    <mat-radio-button value="bar">&nbsp; גרף עמודות &nbsp;</mat-radio-button> -->
 </mat-radio-group>
-<div style="width:800px; margin:0 auto;">
-    <canvas baseChart [chartType]="'pie'" [datasets]="chartData" [labels]="chartLabels" [options]="chartOptions"
-        [legend]="true" (chartClick)="onChartClick($event)">
+
+<div *ngIf="done" style="width:800px; margin:0 auto;">
+    <canvas baseChart [chartType]="selectedGraph.name" [datasets]="chartData" [labels]="chartLabels"
+        [options]="chartOptions" [legend]="true">
     </canvas>
 </div>

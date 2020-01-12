@@ -58,13 +58,29 @@ export class ResearcherService {
     return this.http.post<any>(this.apiUrl + "Receipt/ReturnToAccept/" + familyID, receipt, this.getTokenHeader());
   }
 
+  getPricePerCategory(familyID: string): Observable<any> {
+    return this.http.post<any>(this.apiUrl + "Statistics/GetAllPricesByCategories/" + familyID, '', this.getTokenHeader());
+  }
+
+  GetAllQuantitiesByNutrients(familyID: string): Observable<any> {
+    return this.http.post<any>(this.apiUrl + "Statistics/GetAllQuantitiesByNutrients/" + familyID, '', this.getTokenHeader());
+  }
+
+  getQuantitiesPerCategory(familyID: string): Observable<any> {
+    return this.http.post<any>(this.apiUrl + "Statistics/GetAllQuantitiesByCategories/" + familyID, '', this.getTokenHeader());
+  }
+
+  GetCompareByCost(familyID: string): Observable<any> {
+    return this.http.post<any>(this.apiUrl + "Statistics/GetCompareByCost/" + familyID, '', this.getTokenHeader());
+  }
+
   //Get info from server 
   apiGetCall(apiExt): Observable<any> {
     var dataFromAPI = this.http.get(this.apiUrl + apiExt)
-      .pipe(
-        retry(3), // retry a failed request up to 3 times
-        catchError(this.handleError)
-      );
+      // .pipe(
+      //   retry(3), // retry a failed request up to 3 times
+      //   catchError(this.handleError)
+      // );
     return dataFromAPI;
   }
 
