@@ -50,6 +50,10 @@ export class MetaData {
         return this.price;
     }
 
+    getNutrients() {
+        return this.nutrients;
+    }
+
     setOptionalProducts(input: any) {
         if (input) {
             for (let optionalProduct of input)

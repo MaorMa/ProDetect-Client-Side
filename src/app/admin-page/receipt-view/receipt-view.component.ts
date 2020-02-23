@@ -37,6 +37,7 @@ export class ReceiptViewComponent implements OnInit {
 
   getAllFamilies(): void {
     this.researcherService.GetAllFamilies("View").subscribe((resValue) => {
+      // console.log(resValue);
       this.families = JSON.parse(resValue);
       this.isLoading = false;
       this.selectedFamily = '';
@@ -51,13 +52,15 @@ export class ReceiptViewComponent implements OnInit {
     this.paginator.pageIndex = 0;
     this.isLoading = true;
     this.researcherService.GetAllApprovedData(this.families[index]).subscribe((resValue) => {
-      // console.log(JSON.parse(resValue));
       this.allData = new ReceiptToReturnList().deserialize(JSON.parse(resValue));
+      console.log(this.allData);
       this.allFamilyData = this.allData;
       this.isLoading = false;
       this.amountOfRec = this.allData.Value.length;
-      this.table.updateAllTableData(this.allFamilyData);
-      // console.log(this.allData);
+      if (this.allData.Value.length != 0) {//If no data for user returned
+        this.table.updateAllTableData(this.allFamilyData);
+        // console.log(this.allData);
+      }
     });
   }
 

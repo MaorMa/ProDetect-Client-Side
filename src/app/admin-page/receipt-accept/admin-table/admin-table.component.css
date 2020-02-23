@@ -23,10 +23,11 @@ td {
     position: fixed;
     bottom: 2%;
     right: 1%;
+    background-color: white;
 }
 
 #fixedBtn:hover {
-    background-color: #c0ffac;
+    background-color: #ebebeb;
 }
 
 .saved {

@@ -11,8 +11,8 @@ import { baseURLService } from './base-urlservice.service';
 })
 export class ResearcherService {
 
-  apiUrl: string = 'http://localhost:59416/api/';
-  // apiUrl: string = 'http://proj.ise.bgu.ac.il/Proj-RR/backend/api/';
+  // apiUrl: string = 'http://localhost:59416/api/';
+  apiUrl: string = 'http://proj.ise.bgu.ac.il/Proj-RR/backend/api/';
   // apiUrl: string;
 
   constructor(private http: HttpClient, private snackBar: MatSnackBar, private baseURL: baseURLService) {
@@ -51,7 +51,7 @@ export class ResearcherService {
     const formData = new FormData();
     formData.append("username", familyName);//Form
     formData.append("password", password);//Form
-    return this.http.post<any>(this.apiUrl + "Users/AddFamilyUser/", formData, this.getTokenHeader());
+    return this.http.post<any>(this.apiUrl + "Users/AddFamily/", formData, this.getTokenHeader());
   }
 
   returnToAccept(familyID: string, receipt: ReceiptToReturn) {
@@ -82,25 +82,6 @@ export class ResearcherService {
       //   catchError(this.handleError)
       // );
     return dataFromAPI;
-  }
-
-  //handle all errors from web API
-  private handleError(errorResponse: HttpErrorResponse) {
-    if (errorResponse.error instanceof ErrorEvent) {
-      // A client-side or network error occurred. Handle it accordingly.
-      console.error('An error occurred: ', errorResponse.error.message);
-      this.openSnackBar('An error occurred: ' + errorResponse.error.message, "Close", 2000);
-    } else {
-      // The backend returned an unsuccessful response code.
-      // The response body may contain clues as to what went wrong,
-      console.error(
-        `Backend returned code ${errorResponse.status}, ` +
-        `body was: ${errorResponse.error}`);
-      this.openSnackBar("Backend returned code: " + errorResponse.status, "Close", 2000);
-    }
-    // return an observable with a user-facing error message
-    return throwError(
-      'Something bad happened; please try again later.');
   }
 
   getTokenHeader(): any {

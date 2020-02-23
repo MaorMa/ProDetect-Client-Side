@@ -17,12 +17,12 @@
   <mat-toolbar-row>
     <div>
     </div>
-    <div class="menu-spacer"></div>
     <div class="nav">
       <button mat-button [matMenuTriggerFor]="adminMenu" [hidden]='tokenExists()'>ממשק חוקר</button>
       <button mat-button [matMenuTriggerFor]="viewMenu" [hidden]='tokenExists()'>צפייה בנתונים</button>
 
       <button mat-button [routerLink]="['user']" [hidden]='tokenExists()'>העלאת קבלות</button>
+      <!-- <div class="menu-spacer" [hidden]='tokenExists()'>ברוך הבא + {{sessionStorage.getItem('token')}}</div> -->
       <button mat-button [routerLink]="['login']" [hidden]='!tokenExists()'>התחברות</button>
     </div>
   </mat-toolbar-row>

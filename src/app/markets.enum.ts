@@ -1,8 +1,10 @@
 export enum Markets {
+    'יש' = 'Shupersal',
     'שופרסל' = 'Shupersal',
     'אושר עד' = 'OsherAd',
     'חצי חינם' = 'HatziHinam',
     'טיב טעם' = 'TivTaam',
+    'מגה' = 'Bitan',
     'ינות ביתן' = 'Bitan',
     'מחסני השוק' = 'MHashuk',
     'קינג סטור' = 'KingStore',
@@ -10,6 +12,7 @@ export enum Markets {
     'רמי לוי' = 'RamiLevi',
     'שוק העיר' = 'ShukCity',
     'יוחננוף' = 'Yohananof',
+    'מחסני להב' = 'FreshMarket',
     'פרש מרקט' = 'FreshMarket',
     'ויקטורי' = 'Victory',
 }

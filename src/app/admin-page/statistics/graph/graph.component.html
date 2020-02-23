@@ -1,5 +1,5 @@
 <mat-card class="d-flex justify-content-center card-header">{{title}}</mat-card>
-
+<br>
 <mat-radio-group [(ngModel)]="selectedGraph" style="direction: rtl;" class="d-flex justify-content-center">
     <mat-radio-button *ngFor="let graph of graphs" [value]="graph" [checked]="graph.selected">&nbsp;
         {{graph.description}}

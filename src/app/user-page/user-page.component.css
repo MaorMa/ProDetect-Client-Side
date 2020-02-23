@@ -16,7 +16,7 @@
   background-position:center; 
   -moz-background-size: cover;
   -o-background-size: cover;
-  height: 90vh;
+  height: 80vh;
   width:100%;
   background-image: url(../../assets/background.jpg);
 }

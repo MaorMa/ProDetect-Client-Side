@@ -5,7 +5,7 @@ import { ReceiptToReturn } from 'src/app/Objects/receipt-to-return';
 import { MetaData } from 'src/app/Objects/meta-data';
 import { Angular5Csv } from 'angular5-csv/dist/Angular5-csv';
 import { Markets } from 'src/app/markets.enum';
-import { NutrientViewComponent } from './nutrient-view/nutrient-view.component';
+import { NutrientViewComponent, NutCodeToName } from './nutrient-view/nutrient-view.component';
 import { ResearcherService } from 'src/app/Services/researcher.service';
 import { LoginService } from 'src/app/Services/login.service';
 
@@ -29,14 +29,14 @@ export class ViewTableComponent implements OnInit {
 
   constructor(private dialog: MatDialog, private researcherService: ResearcherService,
     private loginService: LoginService) {
-      this.detectIfAdmin();
+      this.detectIfGlobalAdmin();
     }
 
   ngOnInit() {
   }
 
-  detectIfAdmin(){
-    this.loginService.isAdmin((this.token)).subscribe(
+  detectIfGlobalAdmin(){
+    this.loginService.isGlobalAdmin((this.token)).subscribe(
       (resValue: any) => {
         if (resValue) {
           this.admin = resValue['body'] === true;
@@ -102,7 +102,7 @@ export class ViewTableComponent implements OnInit {
       showLabels: true,
       useBom: true,
       showTitle: false,
-      headers: ["מקט", "שם מוצר", "כמות", "מחיר"],
+      headers: ["מקט", "שם מוצר", "כמות (קג/ליטר)", "מחיר ליחידה/קג", Object.values(NutCodeToName)],
       nullToEmptyString: true,
     };
     let withoutValidProductAttribute = this.currTableData.map(item =>
@@ -110,7 +110,8 @@ export class ViewTableComponent implements OnInit {
         sID: item.getsID(),
         description: item.getDescription(),
         quantity: item.getQuantity(),
-        price: item.getPrice()
+        price: item.getPrice(),
+        nutrients: item.getNutrients().map(a => a.$value)
       }));
     new Angular5Csv(withoutValidProductAttribute, this.currReceipt.receiptID, options);
   }
