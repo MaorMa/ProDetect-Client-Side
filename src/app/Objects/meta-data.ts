@@ -2,15 +2,15 @@ import { Nutrient } from './nutrient';
 import { ResearchProduct } from './research-product';
 
 export class MetaData {
-    private sID: string;
-    private description: string;
-    private quantity: string;
-    private price: string;
-    private validProduct: boolean;
-    private yCoordinate: number = 0;
-    private nutrients: Nutrient[];
-    private optionalProducts: ResearchProduct[] = [];
-    private optionalProductsChosen: ResearchProduct = new ResearchProduct();
+    sID: string;
+    description: string;
+    quantity: string;
+    price: string;
+    validProduct: boolean;
+    yCoordinate: number = 0;
+    nutrients: Nutrient[];
+    optionalProducts: ResearchProduct[] = [];
+    optionalProductsChosen: ResearchProduct = new ResearchProduct();
 
     deserialize(input: any): this {
         this.sID = input.sID;

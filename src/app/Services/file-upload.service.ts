@@ -4,6 +4,7 @@ import { retry, catchError } from 'rxjs/operators'
 import { MatSnackBar } from '@angular/material';
 import { throwError } from 'rxjs';
 import { baseURLService } from './base-urlservice.service';
+import { environment } from 'src/environments/environment';
 
 
 @Injectable({
@@ -11,8 +12,10 @@ import { baseURLService } from './base-urlservice.service';
 })
 export class FileUploadService {
 
+
+  apiUrl: string = environment.baseURL;
   // apiUrl: string = 'http://localhost:59416/api/';
-  apiUrl: string = 'http://proj.ise.bgu.ac.il/Proj-RR/backend/api/';
+  // apiUrl: string = 'http://proj.ise.bgu.ac.il/Proj-RR/backend/api/';
   // apiUrl: string;
 
   constructor(private http: HttpClient, private snackBar: MatSnackBar, private baseURL: baseURLService) {

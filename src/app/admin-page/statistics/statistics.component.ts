@@ -25,7 +25,7 @@ export class StatisticsComponent implements OnInit {
   }
 
   getAllFamilies(): void {
-    this.researcherService.GetAllFamilies("View").subscribe((resValue) => {
+    this.researcherService.GetAllFamiliesByReceiptStatus("View").subscribe((resValue) => {
       this.families = JSON.parse(resValue);
       this.isLoading = false;
       // this.selectedFamily = '';
@@ -64,7 +64,7 @@ export class StatisticsComponent implements OnInit {
         });
         break;
       case 2://money compare
-      this.title = "השוואת הוצאות לאחרים"
+      this.title = "השוואת הוצאות לאחרים (מנורמל לקבלה בודדת)"
       this.researcherService.GetCompareByCost(this.families[this.selectedFamily]).subscribe((resValue) => {
         this.compareData = JSON.parse(resValue);
         this.isLoading = false;

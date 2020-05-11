@@ -69,7 +69,7 @@ import { GraphCompareComponent } from './admin-page/statistics/graph-compare/gra
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    NgxImageZoomModule.forRoot(),
+    NgxImageZoomModule,
     //Material
     MatTabsModule,
     MatSelectModule,

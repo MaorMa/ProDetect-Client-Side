@@ -6,7 +6,8 @@
 
         <div class="form-group row">
             <mat-form-field>
-                <input type="number" formControlName="sID" matTooltip="מקט המוצר" matInput placeholder="מקט">
+                <input #id type="number" formControlName="sID" matTooltip="מקט המוצר" matInput placeholder="מקט">
+                <mat-hint matTooltip="עבור מק''טים ארוכים המתחילים ב729000, ניתן לרשום רק מה שבא אחרי האפסים'"><mat-icon [inline]='true'>help_outline</mat-icon>מקמו עכבר על שורה זו לטיפים</mat-hint>
             </mat-form-field>
             <mat-error>
                 <span *ngIf="!createForm.get('sID').value && createForm.get('sID').touched"></span>
@@ -14,23 +15,26 @@
         </div>
         <div class="form-group row">
             <mat-form-field class="demo-full-width">
-                <input type="text" formControlName="Description" matTooltip="תאור המוצר" matInput placeholder="תיאור">
+                <input #desc type="text" formControlName="Description" matTooltip="תאור המוצר" matInput placeholder="תיאור">
             </mat-form-field>
         </div>
         <div class="form-group row">
             <mat-form-field>
-                <input type="number" formControlName="Quantity" matTooltip="כמות" matInput placeholder="כמות">
+                <input #quan type="text" formControlName="Quantity" matTooltip="כמות" matInput placeholder="כמות" (focusout)="focusOutCulcQuantity(quan.value)">
+                <mat-hint matTooltip="ניתן לבצע פעולות חיבור בלבד בין כמויות למשל 1.2+1.5">
+                    <mat-icon [inline]='true'>help_outline</mat-icon>מקמו עכבר על שורה זו לטיפים
+                  </mat-hint>        
             </mat-form-field>
         </div>
         <div class="form-group row">
             <mat-form-field>
-                <input type="number" formControlName="Price" matTooltip="מחיר המוצר" matInput placeholder="מחיר">
+                <input #price type="number" formControlName="Price" matTooltip="מחיר המוצר" matInput placeholder="מחיר">
             </mat-form-field>
         </div>
-        <button type="button" [disabled]="infoReceived || !createForm.valid" mat-raised-button color="accent"
+        <button type="button" [disabled]="!createForm.valid" mat-raised-button color="accent"
             matTooltip="משיכת נתונים מהשרת" (click)="getProductInfo()">משיכת נתונים
         </button>
-        <button type="submit" [disabled]="!infoReceived" mat-raised-button color="accent" matTooltip="עדכן">הוספת
+        <button type="submit" [disabled]="!infoReceived || id.value==='' || desc.value === '' || price.value === '' " mat-raised-button color="accent" matTooltip="עדכן">הוספת
             מוצר</button>
         <button type="reset" mat-raised-button color="accent" matTooltip="איפוס השדות" (click)="resetForm()">ניקוי
             שדות</button>

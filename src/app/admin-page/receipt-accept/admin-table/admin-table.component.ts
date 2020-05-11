@@ -75,7 +75,7 @@ export class AdminTableComponent implements OnInit {
     dialogRef.componentInstance.editEmitter.subscribe((data: any) => {
       row = data;
       dialogRef.close();
-      this.researcherService.openSnackBar('המוצר עודכן בהצלחה', 'סגור', 1000);
+      this.researcherService.openSnackBar('המוצר עודכן בהצלחה', 'סגור', 1500);
     });
   };
 
@@ -99,7 +99,7 @@ export class AdminTableComponent implements OnInit {
       else {
         this.currTableData.push(data);
         dialogRef.close();
-        this.researcherService.openSnackBar('המוצר נוצר ונוסף בהצלחה', 'סגור', 1000);
+        this.researcherService.openSnackBar('המוצר נוצר ונוסף בהצלחה', 'סגור', 1500);
       }
     });
   };

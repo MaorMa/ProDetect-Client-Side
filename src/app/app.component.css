@@ -21,3 +21,7 @@ mat-toolbar{
     background: #158299;
     color: #fff;
 }
+
+.menu{
+    overflow: auto;
+}

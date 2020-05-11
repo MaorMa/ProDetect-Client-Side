@@ -4,14 +4,16 @@ import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material';
 import { baseURLService } from './base-urlservice.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
 
+  apiUrl: string = environment.baseURL;
   // apiUrl: string = 'http://localhost:59416/api/';
-  apiUrl: string = 'http://proj.ise.bgu.ac.il/Proj-RR/backend/api/';
+  // apiUrl: string = 'http://proj.ise.bgu.ac.il/Proj-RR/backend/api/';
   // apiUrl: string; 
 
   constructor(private http: HttpClient, private snackBar: MatSnackBar, private baseURL: baseURLService) {

@@ -2,3 +2,9 @@
     direction: rtl;
     text-align: right;
 }
+
+.tips {
+    font-size: x-small;
+    margin-top: -15px;
+    color: rgb(87, 177, 255);
+}

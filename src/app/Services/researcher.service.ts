@@ -5,14 +5,16 @@ import { catchError, retry } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ReceiptToReturn } from '../Objects/receipt-to-return';
 import { baseURLService } from './base-urlservice.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ResearcherService {
 
+  apiUrl: string = environment.baseURL;
   // apiUrl: string = 'http://localhost:59416/api/';
-  apiUrl: string = 'http://proj.ise.bgu.ac.il/Proj-RR/backend/api/';
+  // apiUrl: string = 'http://proj.ise.bgu.ac.il/Proj-RR/backend/api/';
   // apiUrl: string;
 
   constructor(private http: HttpClient, private snackBar: MatSnackBar, private baseURL: baseURLService) {
@@ -23,8 +25,8 @@ export class ResearcherService {
     return this.http.post<any>(this.apiUrl + "Receipt/GetAllRecognizedData/", '', this.getTokenHeader());
   }
 
-  GetAllFamilies(accView: string): Observable<any> {
-    return this.http.post<any>(this.apiUrl + "Receipt/GetAllFamilies/" + accView, '', this.getTokenHeader());
+  GetAllFamiliesByReceiptStatus(accView: string): Observable<any> {
+    return this.http.post<any>(this.apiUrl + "Receipt/GetAllFamiliesByReceiptStatus/" + accView, '', this.getTokenHeader());
   }
 
   GetAllFamilyData(familyID: string): Observable<any> {
@@ -37,6 +39,14 @@ export class ResearcherService {
 
   GetAllDataForMarketAndProductID(marketID: string, productID: number): Observable<any> {
     return this.apiGetCall("Receipt/GetProductInfo/" + marketID + "/" + productID);
+  }
+
+  GetSimilarProductsByDescription( description: string): Observable<any> {
+    return this.apiGetCall("Receipt/GetSimilarProductsByDesc/" + description);
+  }
+
+  UpsertSimilarProducts(description: string, marketID: string, sID: number): Observable<any> {
+    return this.http.post<any>(this.apiUrl + "Receipt/UpsertSimilarProducts/" + description + "/" + marketID + "/" + sID, '', this.getTokenHeader());
   }
 
   SaveCurrentReceipt(currTableData: ReceiptToReturn, selectedFamily: string): Observable<any> {

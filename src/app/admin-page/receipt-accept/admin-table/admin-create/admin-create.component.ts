@@ -4,6 +4,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ResearcherService } from 'src/app/Services/researcher.service';
 import { MetaData } from 'src/app/Objects/meta-data';
 import { MatSnackBar } from '@angular/material';
+import { ResearchProduct } from 'src/app/Objects/research-product';
 
 @Component({
   selector: 'app-admin-create',
@@ -14,7 +15,7 @@ export class AdminCreateComponent implements OnInit {
   @Output() createEmitter = new EventEmitter();
   createForm: FormGroup;
   infoReceived: boolean = false;
-  optionalProducts: string;
+  optionalProducts: ResearchProduct[] = [];
 
   constructor(private formbulider: FormBuilder, @Inject(MAT_DIALOG_DATA) public data: any, private snackBar: MatSnackBar, private researcherService: ResearcherService) { }
 
@@ -51,20 +52,34 @@ export class AdminCreateComponent implements OnInit {
       }
       this.infoReceived = true;
     });
+  }
 
+  UpsertSimilarProducts(sID: number, description: string, productLine: MetaData) {
+    this.researcherService.UpsertSimilarProducts(description, this.data['marketID'], sID).subscribe((resValue: ResearchProduct[]) => {
+      // console.log(resValue);
+      productLine.setOptionalProducts(resValue);
+      this.createEmitter.emit(productLine);
+      this.infoReceived = true;
+    });
   }
 
   onFormSubmit(createFormValue: any): void {
+    this.focusOutCulcQuantity(this.createForm.value.Quantity);
     var productLine: MetaData = new MetaData();
-    // console.log(createFormValue)
     productLine['description'] = createFormValue.Description;
     productLine['sID'] = createFormValue.sID;
-    productLine['quantity'] = createFormValue.Quantity;
+    productLine['quantity'] = this.createForm.get('Quantity').value;
     productLine['price'] = createFormValue.Price;
     productLine['validProduct'] = true;
-    productLine.setOptionalProducts(this.optionalProducts);
+    if (this.optionalProducts.length != 0) {
+      productLine.setOptionalProducts(this.optionalProducts);
+      this.createEmitter.emit(productLine);
+    }
+    else {
+      this.UpsertSimilarProducts(createFormValue.sID, createFormValue.Description, productLine);
+      //call
+    }
     // console.log(productLine)
-    this.createEmitter.emit(productLine);
   }
 
   resetForm() {
@@ -72,7 +87,21 @@ export class AdminCreateComponent implements OnInit {
     this.createForm.get('Description').disable();
     this.createForm.get('Price').disable();
     this.createForm.get('Quantity').disable();
+    this.optionalProducts = [];
     this.infoReceived = false;
+  }
+
+  focusOutCulcQuantity(quan: String) {
+    quan = quan.toString().replace(/[,\/#!$%\^&\*;:{}\=\-_`~()]/g, "")
+    var splitQuan = quan.split('+');
+    var sum = 0;
+    splitQuan.forEach(num => sum += parseFloat(num.trim()));
+    if (!isNaN(sum)) {
+      this.createForm.get('Quantity').setValue(parseFloat(sum.toFixed(3)));
+    }
+    else {
+      this.createForm.get('Quantity').setValue(1);
+    }
   }
 
   /**
@@ -86,5 +115,6 @@ export class AdminCreateComponent implements OnInit {
       duration: duration,
     });
   }
+  
 
 }

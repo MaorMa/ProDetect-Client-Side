@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material';
 import { Nutrient } from 'src/app/Objects/nutrient';
+import { element } from 'protractor';
 
 @Component({
   selector: 'app-nutrient-view',
@@ -18,7 +19,7 @@ export class NutrientViewComponent implements OnInit {
   ngOnInit() {
     console.log(this.data)
     this.nutrients = this.data.Nutrients;
-    this.nutrientsToShow = this.nutrients.filter(element => element.$value != 0)
+    this.nutrientsToShow = this.nutrients.filter(element => element.$value != 0);
     // console.log(this.nutrients)
     // console.log(this.nutrientsToShow)
   }

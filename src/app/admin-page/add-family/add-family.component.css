@@ -55,10 +55,15 @@ form, button,img{
     flex-direction: column;
 }
 
+mat-form-field{
+    width: 190px;
+}
+
 button{
     background: #1f6d7e;
     width: 100%;
 }
+
 
 .main-div{
     display: flex;

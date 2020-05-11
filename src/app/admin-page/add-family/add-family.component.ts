@@ -9,11 +9,13 @@ import { MatSnackBar } from '@angular/material';
   styleUrls: ['./add-family.component.css']
 })
 export class AddFamilyComponent implements OnInit {
+  hide: boolean;
   createForm: FormGroup;
 
   constructor(private formbulider: FormBuilder, private researcherService: ResearcherService, private snackBar: MatSnackBar) { }
 
   ngOnInit() {
+    this.hide = true;
     this.createForm = this.formbulider.group({
       sID: [ '', [Validators.required]],
       password: ['',[Validators.required]]

@@ -35,7 +35,7 @@ export class ReceiptAcceptComponent implements OnInit {
   }
 
   getAllFamilies(): void {
-    this.researcherService.GetAllFamilies("Acc").subscribe((resValue) => {
+    this.researcherService.GetAllFamiliesByReceiptStatus("Acc").subscribe((resValue) => {
       this.families = JSON.parse(resValue);
       this.isLoading = false;
       this.selectedFamily = '';

@@ -3,14 +3,16 @@ import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { retry } from 'rxjs/operators';
 import { baseURLService } from './base-urlservice.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GetSettingsService {
 
+  apiUrl: string = environment.baseURL;
   // apiUrl: string = 'http://localhost:59416/api/';
-  apiUrl: string = 'http://proj.ise.bgu.ac.il/Proj-RR/backend/api/';
+  // apiUrl: string = 'http://proj.ise.bgu.ac.il/Proj-RR/backend/api/';
   // apiUrl: string;
 
   constructor(private http: HttpClient, private baseURL: baseURLService) {

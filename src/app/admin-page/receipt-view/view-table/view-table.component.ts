@@ -29,14 +29,14 @@ export class ViewTableComponent implements OnInit {
 
   constructor(private dialog: MatDialog, private researcherService: ResearcherService,
     private loginService: LoginService) {
-      this.detectIfGlobalAdmin();
+      this.detectIfAdmin();
     }
 
   ngOnInit() {
   }
 
-  detectIfGlobalAdmin(){
-    this.loginService.isGlobalAdmin((this.token)).subscribe(
+  detectIfAdmin(){
+    this.loginService.isAdmin((this.token)).subscribe(
       (resValue: any) => {
         if (resValue) {
           this.admin = resValue['body'] === true;

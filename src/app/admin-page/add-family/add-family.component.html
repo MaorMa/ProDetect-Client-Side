@@ -25,8 +25,9 @@
                 </div>
                 <div class="form-group row">
                     <mat-form-field appearance="outline">
-                        <input type="text" minlength="8" ngControl="password" formControlName="password" matTooltip="סיסמא" matInput
+                        <input type="password" minlength="8" [type]="hide ? 'password' : 'text'" ngControl="password" formControlName="password" matTooltip="סיסמא" matInput
                             placeholder="סיסמא">
+                            <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                     </mat-form-field>
                 </div>
                 <button class="btn btn-primary" type="submit" [disabled]="!createForm.valid" matTooltip="יצירת משתמש חדש למשפחה" mat-raised-button>הוספת משפחה למערכת </button>

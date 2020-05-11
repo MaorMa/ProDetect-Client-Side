@@ -10,10 +10,30 @@
     margin-top: 15px;
 }
 
-.flex-container {
+/* .flex-container {
     display: flex;
     justify-content: center;
     align-content: stretch;
+} */
+
+@media screen and (max-width: 800px) {
+    .flex-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+    }
+    
+    #image {
+        align-self: center;
+    }
+}
+
+@media screen and (min-width: 800px) {
+    .flex-container {
+        display: flex;
+        justify-content: center;
+        align-content: stretch;
+    }
 }
 
 .alert {
@@ -44,4 +64,8 @@
 
 .table {
     margin-right: 10px;
+}
+
+#page {
+    overflow: auto;
 }
