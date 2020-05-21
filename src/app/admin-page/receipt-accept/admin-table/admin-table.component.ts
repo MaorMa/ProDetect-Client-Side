@@ -69,7 +69,7 @@ export class AdminTableComponent implements OnInit {
     editDialogConfig.disableClose = false;
     editDialogConfig.autoFocus = true;
     editDialogConfig.position = { 'right': '2.5%' };
-    editDialogConfig.maxWidth = "25%";
+    // editDialogConfig.maxWidth = "25%";
     editDialogConfig.data = row;
     var dialogRef = this.dialog.open(AdminUpdateComponent, editDialogConfig);
     dialogRef.componentInstance.editEmitter.subscribe((data: any) => {
@@ -84,7 +84,7 @@ export class AdminTableComponent implements OnInit {
     editDialogConfig.disableClose = false;
     editDialogConfig.autoFocus = true;
     editDialogConfig.position = { 'right': '2.5%' };
-    editDialogConfig.maxWidth = "25%";
+    // editDialogConfig.maxWidth = "25%";
     editDialogConfig.data = { marketID: this.currMarket };
     var dialogRef = this.dialog.open(AdminCreateComponent, editDialogConfig);
     dialogRef.componentInstance.createEmitter.subscribe((data: MetaData) => {

@@ -19,7 +19,7 @@ mat-form-field{
 
 .main-div{
     display: flex;
-    height: 90vh;
+    height: 80vh;
     justify-content: center;
     align-items: center;
     background-repeat: no-repeat;
