@@ -82,7 +82,7 @@ export class ViewTableComponent implements OnInit {
       const editDialogConfig = new MatDialogConfig();
       editDialogConfig.disableClose = false;
       editDialogConfig.autoFocus = true;
-      editDialogConfig.maxWidth = "55%";
+      // editDialogConfig.maxWidth = "55%";
       editDialogConfig.maxHeight = "85%";
       editDialogConfig.data = { Nutrients: row.nutrients, ProductName: row.description };
       var dialogRef = this.dialog.open(NutrientViewComponent, editDialogConfig);

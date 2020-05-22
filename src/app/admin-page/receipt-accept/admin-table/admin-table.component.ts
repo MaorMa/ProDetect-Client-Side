@@ -120,7 +120,7 @@ export class AdminTableComponent implements OnInit {
   }
 
   saveCurrReceipt(): void {
-    console.log(this.allTableData['Value'][this.currRecIndex]);
+    // console.log(this.allTableData['Value'][this.currRecIndex]);
     if (confirm("האם לשמור קבלה זו? לאחר השמירה, הקבלה לא תוצג שנית")) {
       this.researcherService.SaveCurrentReceipt(this.allTableData['Value'][this.currRecIndex], this.selectedFamily).subscribe(
         (resValue) => {
